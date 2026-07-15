@@ -9,7 +9,7 @@ export default function AboutView({ setView, onBookClick }: AboutViewProps) {
   const credentials = {
     education: [
       {
-        degree: "Fellowship in Allergy and Immunology",
+        degree: "abcd",
         institution: "National Institutes of Health (NIH), Bethesda, MD",
         year: "1984 - 1987",
         desc: "Specialized clinical and laboratory research in immunopharmacology and ocular surface allergic reactions."
