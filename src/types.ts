@@ -6,6 +6,7 @@ export interface Service {
   symptoms: string[];
   treatments: string[];
   iconName: string; // Used to map to Lucide icons
+  imageUrl?: string;
 }
 
 export interface OfficeLocation {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import { ARTICLES } from "../data";
 import { Article } from "../types";
 import { Search, BookOpen, Calendar, Clock, User, ArrowLeft, Printer, ShieldAlert, FileText, CheckCircle } from "lucide-react";
@@ -47,6 +47,15 @@ export default function ResourcesView() {
 
           {/* Article Card Wrapper */}
           <article className="bg-white rounded-3xl border border-slate-100 p-6 md:p-10 shadow-sm">
+            {activeArticle.imageUrl && (
+              <div className="w-full h-64 md:h-[400px] overflow-hidden rounded-3xl mb-8 border border-slate-150">
+                <img
+                  src={activeArticle.imageUrl}
+                  alt={activeArticle.title}
+                  className="w-full h-full object-contain bg-white"
+                />
+              </div>
+            )}
             {/* Metadata headers */}
             <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 mb-4">
               <span className="bg-dominant-green-light text-dominant-green-dark font-bold px-2.5 py-1 rounded-md">
@@ -95,13 +104,13 @@ export default function ResourcesView() {
                     <div key={idx} className="pl-4 space-y-2 py-2">
                       {paragraph.split("\n").map((li, lIdx) => (
                         <p key={lIdx} className="text-slate-600 pl-2 border-l-2 border-dominant-green italic">
-                          {li.trim()}
+                          {parseTextAndRenderLinks(li.trim())}
                         </p>
                       ))}
                     </div>
                   );
                 }
-                return <p key={idx}>{paragraph}</p>;
+                return <p key={idx}>{parseTextAndRenderLinks(paragraph)}</p>;
               })}
             </div>
 
@@ -214,6 +223,15 @@ export default function ResourcesView() {
                   className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-slate-200 cursor-pointer transition-all flex flex-col justify-between group"
                 >
                   <div>
+                    {article.imageUrl && (
+                      <div className="w-full overflow-hidden rounded-xl mb-4 border border-slate-150">
+                        <img
+                          src={article.imageUrl}
+                          alt={article.title}
+                          className="w-full h-auto bg-white transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    )}
                     <div className="flex justify-between items-center text-[10px] text-dominant-green uppercase font-bold tracking-wider mb-3">
                       <span>{article.category}</span>
                       <span className="flex items-center gap-1 text-slate-400 normal-case font-medium">
@@ -293,4 +311,74 @@ export default function ResourcesView() {
       </div>
     </div>
   );
+}
+
+// Helper to convert plain text URLs and DOIs into clickable links
+function parseTextAndRenderLinks(text: string) {
+  const regex = /(https?:\/\/[^\s\)]+)|(DOI:\s*([^\s\)]+))/gi;
+
+  const parts: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  regex.lastIndex = 0;
+
+  while ((match = regex.exec(text)) !== null) {
+    const matchIndex = match.index;
+
+    // Add plain text before match
+    if (matchIndex > lastIndex) {
+      parts.push(text.substring(lastIndex, matchIndex));
+    }
+
+    if (match[1]) {
+      // It's a URL
+      let url = match[1];
+      let trailingPunctuation = "";
+      const puncMatch = url.match(/[\.,;\?]+$/);
+      if (puncMatch) {
+        trailingPunctuation = puncMatch[0];
+        url = url.substring(0, url.length - trailingPunctuation.length);
+      }
+      parts.push(
+        <span key={matchIndex}>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 hover:underline font-semibold break-all"
+          >
+            {url}
+          </a>
+          {trailingPunctuation}
+        </span>
+      );
+    } else if (match[2]) {
+      // It's a DOI
+      const doiId = match[3];
+      const doiUrl = `https://doi.org/${doiId}`;
+      parts.push(
+        <span key={matchIndex}>
+          DOI:{" "}
+          <a
+            href={doiUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 hover:underline font-semibold break-all"
+          >
+            {doiId}
+          </a>
+        </span>
+      );
+    }
+
+    lastIndex = regex.lastIndex;
+  }
+
+  // Add the remaining text
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
 }

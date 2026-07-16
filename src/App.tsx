@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { SERVICES, LOCATIONS, TESTIMONIALS, ARTICLES } from "./data";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -11,11 +11,30 @@ import ResourcesView from "./components/ResourcesView";
 import ContactView from "./components/ContactView";
 
 // Lucide icons for the services preview cards
-import { Eye, ShieldCheck, Pill, Wind, ClipboardList, Activity, ArrowRight, Heart, Calendar, MapPin, Clock, Phone, Printer, ExternalLink } from "lucide-react";
+import { Eye, ShieldCheck, Pill, Wind, ClipboardList, Activity, ArrowRight, Heart, Calendar, MapPin, Clock, Phone, Printer, ExternalLink, CheckCircle } from "lucide-react";
 
 export default function App() {
   const [currentView, setCurrentView] = useState<string>("home");
   const [preselectedService, setPreselectedService] = useState<string>("unspecified");
+
+  // Home Contact Form State
+  const [homeName, setHomeName] = useState("");
+  const [homeEmail, setHomeEmail] = useState("");
+  const [homePhone, setHomePhone] = useState("");
+  const [homeMessage, setHomeMessage] = useState("");
+  const [homeContactSubmitted, setHomeContactSubmitted] = useState(false);
+
+  const handleHomeContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (homeName && homeEmail && homePhone) {
+      setHomeContactSubmitted(true);
+      setHomeName("");
+      setHomeEmail("");
+      setHomePhone("");
+      setHomeMessage("");
+      setTimeout(() => setHomeContactSubmitted(false), 8000);
+    }
+  };
 
   const handleBookClick = () => {
     setPreselectedService("unspecified");
@@ -64,145 +83,82 @@ export default function App() {
       <main className="flex-grow">
         {currentView === "home" && (
           <div className="animate-in fade-in duration-300">
-            {/* HERO SECTION */}
+            {/* 1. HERO SECTION */}
             <Hero
               onBookClick={handleBookClick}
               onContactClick={handleContactClick}
               setView={setCurrentView}
             />
 
-            {/* PHILOSOPHY / ABOUT PREVIEW */}
-            <section className="py-20 bg-slate-50 border-b border-slate-100">
-              <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                <div className="lg:col-span-6 space-y-6">
-                  <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3 py-1.5 rounded-full">
-                    Practice Philosophy
+            {/* 2. TESTIMONIALS SECTION */}
+            <Testimonials reviews={TESTIMONIALS} />
+
+            {/* 3. SERVICES GROUP 1: SERVICES WE PROVIDE */}
+            <section className="pt-10 pb-6 bg-slate-50/60 border-b border-slate-100">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                <div className="text-center max-w-3xl mx-auto mb-8">
+                  <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3.5 py-1.5 rounded-full font-sans">
+                    Services we provide
                   </span>
-                  <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-                    “Treat the Patient, You Always Win”
+                  <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mt-3">
+                    Featured Services
                   </h2>
-                  <blockquote className="border-l-4 border-dominant-green pl-4 italic text-slate-700 text-sm md:text-base leading-relaxed">
-                    "When we take the time to explain the science of an allergy or immune disorder, we give patients back their control. Medicine is a partnership based on education and mutual trust."
-                  </blockquote>
-                  <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
-                    Dr. Leonard Bielory, M.D. approach goes far beyond quick prescriptions. Drawing on his years as a Full Professor at Rutgers and NIH clinical fellow, he combines cutting-edge clinical research with highly compassionate, individualized diagnostic reviews.
-                  </p>
-                  <div className="pt-2">
-                    <button
-                      onClick={() => {
-                        setCurrentView("about");
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                      className="text-dominant-green hover:text-dominant-green-dark font-bold text-xs sm:text-sm flex items-center gap-1 hover:underline group"
-                    >
-                      <span>Read Dr. Bielory's full academic credentials &amp; background</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                    </button>
-                  </div>
                 </div>
 
-                {/* Right decorative visual box */}
-                <div className="lg:col-span-6 flex justify-center">
-                  <div className="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm max-w-md w-full relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-4 opacity-5 text-dominant-green">
-                      <Heart className="w-40 h-40" />
-                    </div>
-                    <h3 className="font-serif text-lg font-bold text-slate-950 mb-4 flex items-center gap-2">
-                      <Heart className="w-5 h-5 text-dominant-green fill-dominant-green/15" />
-                      <span>The Holistic Care Advantage</span>
-                    </h3>
-                    <ul className="space-y-4 text-xs text-slate-600">
-                      <li className="flex gap-2.5">
-                        <span className="text-dominant-green font-bold shrink-0">•</span>
-                        <div>
-                          <strong className="text-slate-900 block">Root-Cause Analysis</strong>
-                          <span>Differentiating ocular allergies from general dry eye via advanced multi-point lipid film tear assays.</span>
-                        </div>
-                      </li>
-                      <li className="flex gap-2.5">
-                        <span className="text-dominant-green font-bold shrink-0">•</span>
-                        <div>
-                          <strong className="text-slate-900 block">Environmental Management</strong>
-                          <span>Providing detailed pollen count mappings and home trigger isolation guides instead of just symptom masking.</span>
-                        </div>
-                      </li>
-                      <li className="flex gap-2.5">
-                        <span className="text-dominant-green font-bold shrink-0">•</span>
-                        <div>
-                          <strong className="text-slate-900 block">Advanced Biologics Coordination</strong>
-                          <span>Targeting IL-4 and IL-5 immune cascades directly for severe hives, eczema, and asthma.</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* SERVICES PREVIEW GRID */}
-            <section className="py-20 bg-white">
-              <div className="max-w-7xl mx-auto px-4">
-                {/* Section Header */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12">
-                  <div>
-                    <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3 py-1.5 rounded-full">
-                      Clinical Scope
-                    </span>
-                    <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mt-4">
-                      Specialized Immunology & Allergy Solutions
-                    </h2>
-                    <p className="text-slate-500 mt-2 text-xs md:text-sm max-w-xl">
-                      Access state-of-the-art allergy testing, drug desensitization programs, and meibomian gland ocular surface dry-eye therapies.
-                    </p>
-                  </div>
-
-                  <button
-                    onClick={() => {
-                      setCurrentView("services");
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                    className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-lg shadow-sm transition-all text-center"
-                  >
-                    View All Services &amp; Guides
-                  </button>
-                </div>
-
-                {/* Services cards grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {SERVICES.slice(0, 6).map((service) => (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                  {SERVICES.slice(0, 3).map((service) => (
                     <div
                       key={service.id}
-                      className="bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-slate-200/80 transition-all flex flex-col justify-between group"
+                      className="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-md hover:border-slate-200/80 transition-all duration-300 flex flex-col justify-between group"
                     >
                       <div>
-                        <div className="bg-slate-50 p-3 rounded-xl inline-block text-dominant-green group-hover:bg-dominant-green-light transition-colors">
-                          {getServiceIcon(service.iconName)}
+                        {/* Service Card Top Image Banner */}
+                        <div className="h-48 w-full overflow-hidden relative bg-white border-b border-slate-100/60 flex items-center justify-center p-4">
+                          {service.imageUrl && (
+                            <img
+                              src={service.imageUrl}
+                              alt={service.title}
+                              className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                            />
+                          )}
+                          <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm p-2 rounded-xl text-dominant-green shadow-sm shrink-0 border border-slate-100/40">
+                            {getServiceIcon(service.iconName)}
+                          </div>
                         </div>
-                        <h3 className="font-serif text-base font-bold text-slate-900 mt-4 group-hover:text-dominant-green transition-colors">
-                          {service.title}
-                        </h3>
-                        <p className="text-slate-600 text-xs mt-2.5 leading-relaxed">
-                          {service.shortDescription}
-                        </p>
+
+                        <div className="p-4">
+                          <h3 className="font-serif text-base font-bold text-slate-900 group-hover:text-dominant-green transition-colors leading-snug flex items-center">
+                            {service.title}
+                          </h3>
+                          <p className="text-slate-600 text-xs mt-1.5 leading-relaxed font-sans">
+                            {service.shortDescription}
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center text-xs">
-                        <button
-                          onClick={() => {
-                            setCurrentView("services");
-                            window.scrollTo({ top: 0, behavior: "smooth" });
-                          }}
-                          className="text-slate-500 hover:text-dominant-green hover:underline"
-                        >
-                          View symptoms &bull;
-                        </button>
-                        <button
-                          onClick={() => handleRequestService(service.id)}
-                          className="text-dominant-orange hover:text-dominant-orange-dark font-bold flex items-center gap-0.5 group/btn"
-                        >
-                          <span>Book Treatment</span>
-                          <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
-                        </button>
+                      <div className="p-4 pt-0">
+                        <div className="pt-3 border-t border-slate-100 flex justify-end items-center text-xs">
+                          {service.id === "immunological-treatments" ? (
+                            <button
+                              onClick={() => {
+                                  setCurrentView("services");
+                                  window.scrollTo({ top: 0, behavior: "smooth" });
+                              }}
+                              className="text-dominant-green hover:text-dominant-green-dark font-bold flex items-center gap-0.5 group/btn font-sans"
+                            >
+                              <span>Learn More</span>
+                              <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => handleRequestService(service.id)}
+                              className="text-dominant-orange hover:text-dominant-orange-dark font-bold flex items-center gap-0.5 group/btn font-sans"
+                            >
+                              <span>Request Appointment</span>
+                              <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -210,23 +166,239 @@ export default function App() {
               </div>
             </section>
 
-            {/* TESTIMONIALS SECTION */}
-            <Testimonials reviews={TESTIMONIALS} />
+            {/* 4. SERVICES GROUP 2: IN THE SPOTLIGHT */}
+            <section className="pt-6 pb-10 bg-white border-b border-slate-100">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                <div className="text-center max-w-3xl mx-auto mb-8">
+                  <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3.5 py-1.5 rounded-full font-sans">
+                    In the spotlight
+                  </span>
+                  <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mt-3">
+                    Featured services
+                  </h2>
+                </div>
 
-            {/* CREDIBILITY BADGES STRIP */}
-            <Credibility />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                  {[
+                    SERVICES[3], // Eye, Nose, Sinus...
+                    SERVICES[5], // Symptoms of Unknown Origin
+                    SERVICES[4]  // Specialized Allergy Testing
+                  ].map((service) => (
+                    <div
+                      key={service.id}
+                      className="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-md hover:border-slate-200/80 transition-all duration-300 flex flex-col justify-between group"
+                    >
+                      <div>
+                        {/* Service Card Top Image Banner */}
+                        <div className="h-48 w-full overflow-hidden relative bg-white border-b border-slate-100/60 flex items-center justify-center p-4">
+                          {service.imageUrl && (
+                            <img
+                              src={service.imageUrl}
+                              alt={service.title}
+                              className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                            />
+                          )}
+                          <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm p-2 rounded-xl text-dominant-green shadow-sm shrink-0 border border-slate-100/40">
+                            {getServiceIcon(service.iconName)}
+                          </div>
+                        </div>
 
-            {/* CLINICAL RESOURCES / BLOG PREVIEW */}
-            <section className="py-20 bg-slate-50 border-y border-slate-100">
+                        <div className="p-4">
+                          <h3 className="font-serif text-base font-bold text-slate-900 group-hover:text-dominant-green transition-colors leading-snug flex items-center">
+                            {service.title}
+                          </h3>
+                          <p className="text-slate-600 text-xs mt-1.5 leading-relaxed font-sans">
+                            {service.shortDescription}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="p-4 pt-0">
+                        <div className="pt-3 border-t border-slate-100 flex justify-end items-center text-xs">
+                          <button
+                            onClick={() => handleRequestService(service.id)}
+                            className="text-dominant-orange hover:text-dominant-orange-dark font-bold flex items-center gap-0.5 group/btn font-sans"
+                          >
+                            <span>Request Appointment</span>
+                            <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 7. SCHEDULING & CONTACT FORM */}
+            <section className="py-20 bg-slate-50 border-t border-slate-100">
+              <div className="max-w-7xl mx-auto px-4">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-7xl mx-auto">
+                  
+                  {/* Left Column: Phone Scheduling Details */}
+                  <div className="lg:col-span-5 space-y-6">
+                    <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3 py-1.5 rounded-full">
+                      Schedule an Appointment Today!
+                    </span>
+                    <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+                      Get in touch with us today!
+                    </h2>
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                      Use this form to send us any general questions you may have.
+                    </p>
+
+                    <div className="space-y-4 pt-4">
+                      <div className="p-5 bg-white border border-slate-150 rounded-2xl flex items-start gap-4 shadow-sm">
+                        <div className="bg-dominant-orange-light p-3 rounded-xl text-dominant-orange shrink-0">
+                          <Phone className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-serif font-bold text-slate-950 text-sm">Call Directly to schedule</h4>
+                          <a href="tel:9739129817" className="text-base font-bold text-dominant-green hover:underline mt-1 block">
+                            973-912-9817
+                          </a>
+                          <p className="text-[10px] text-slate-500 mt-1">
+                            Call now and receive a 20% off all Sinusol Products.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="p-5 bg-dominant-green-light/45 border border-dominant-green-light rounded-2xl flex items-start gap-4">
+                        <div className="bg-dominant-green-light p-3 rounded-xl text-dominant-green shrink-0">
+                          <Calendar className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-serif font-bold text-slate-950 text-sm">Book Online</h4>
+                          <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                            If you would like to book online please visit our online booking page for more information.
+                          </p>
+                          <div className="mt-3 flex items-center gap-3">
+                            <span className="text-xs font-bold text-slate-400">OR</span>
+                            <button
+                              onClick={() => {
+                                setCurrentView("contact");
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                              }}
+                              className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 animate-pulse"
+                            >
+                              <span>Book an Appointment</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Contact Message Form */}
+                  <div className="lg:col-span-7">
+                    <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm">
+                      <h3 className="font-serif text-lg font-bold text-slate-950 mb-6 flex items-center gap-2">
+                        <Activity className="w-5 h-5 text-dominant-green" />
+                        <span>Send Us a Message</span>
+                      </h3>
+
+                      {homeContactSubmitted ? (
+                        <div className="bg-emerald-50 border border-emerald-500/20 text-emerald-800 p-6 rounded-2xl flex items-start gap-3">
+                          <CheckCircle className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
+                          <div>
+                            <h4 className="font-bold text-sm">Message Sent Successfully!</h4>
+                            <p className="text-xs text-emerald-700 mt-1 leading-relaxed">
+                              Thank you for your message. Our clinical coordinators will review your submission and respond shortly.
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <form onSubmit={handleHomeContactSubmit} className="space-y-4 font-sans">
+                          <div>
+                            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" htmlFor="home-name">
+                              Enter your name
+                            </label>
+                            <input
+                              type="text"
+                              id="home-name"
+                              required
+                              value={homeName}
+                              onChange={(e) => setHomeName(e.target.value)}
+                              placeholder="Name *"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-colors"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" htmlFor="home-email">
+                              Enter your email
+                            </label>
+                            <input
+                              type="email"
+                              id="home-email"
+                              required
+                              value={homeEmail}
+                              onChange={(e) => setHomeEmail(e.target.value)}
+                              placeholder="Email *"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-colors"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" htmlFor="home-phone">
+                              Phone
+                            </label>
+                            <input
+                              type="tel"
+                              id="home-phone"
+                              required
+                              value={homePhone}
+                              onChange={(e) => setHomePhone(e.target.value)}
+                              placeholder="Phone *"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-colors"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" htmlFor="home-message">
+                              Your message
+                            </label>
+                            <textarea
+                              rows={4}
+                              id="home-message"
+                              value={homeMessage}
+                              onChange={(e) => setHomeMessage(e.target.value)}
+                              placeholder="Your message"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-colors"
+                            ></textarea>
+                          </div>
+
+                          <div className="text-[10px] text-slate-400">
+                            * Indicates a required field
+                          </div>
+
+                          <button
+                            type="submit"
+                            className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs md:text-sm px-6 py-3.5 rounded-xl shadow-sm transition-all w-full text-center"
+                          >
+                            Submit Message
+                          </button>
+                        </form>
+                      )}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+            {/* 8. Recent Blog Posts Section */}
+            <section className="py-20 bg-white">
               <div className="max-w-7xl mx-auto px-4">
                 {/* Header */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12 font-sans">
                   <div>
                     <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3 py-1.5 rounded-full">
-                      Educational Literature
+                      News + events
                     </span>
                     <h2 className="font-serif text-3xl font-bold text-slate-900 tracking-tight mt-4">
-                      Latest Allergy &amp; Eye Health Resource Guides
+                      Recent Blog Posts
                     </h2>
                   </div>
                   <button
@@ -242,30 +414,39 @@ export default function App() {
                 </div>
 
                 {/* Articles Preview Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {ARTICLES.slice(0, 3).map((art) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {ARTICLES.slice(0, 4).map((art) => (
                     <div
                       key={art.id}
                       onClick={() => {
                         setCurrentView("resources");
                         window.scrollTo({ top: 0, behavior: "smooth" });
                       }}
-                      className="bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-slate-200 cursor-pointer transition-all flex flex-col justify-between group"
+                      className="bg-slate-50 border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-slate-200 cursor-pointer transition-all flex flex-col justify-between group"
                     >
                       <div>
-                        <div className="text-[10px] text-dominant-green font-bold uppercase tracking-wider mb-2">
+                        {art.imageUrl && (
+                          <div className="h-44 w-full overflow-hidden rounded-xl mb-4 border border-slate-200/50">
+                            <img
+                              src={art.imageUrl}
+                              alt={art.title}
+                              className="w-full h-full object-contain bg-white transition-transform duration-500 group-hover:scale-105"
+                            />
+                          </div>
+                        )}
+                        <div className="text-[10px] text-dominant-green font-bold uppercase tracking-wider mb-2 font-sans">
                           {art.category}
                         </div>
-                        <h3 className="font-serif font-bold text-slate-900 text-sm md:text-base leading-snug group-hover:text-dominant-green transition-colors line-clamp-2">
+                        <h3 className="font-serif font-bold text-slate-900 text-xs sm:text-sm leading-snug group-hover:text-dominant-green transition-colors line-clamp-2">
                           {art.title}
                         </h3>
-                        <p className="text-slate-500 text-xs mt-3 leading-relaxed line-clamp-3">
+                        <p className="text-slate-500 text-[11px] mt-3 leading-relaxed line-clamp-3 font-sans">
                           {art.excerpt}
                         </p>
                       </div>
-                      <div className="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center text-[11px] text-slate-400">
-                        <span className="font-semibold text-slate-600">{art.author}</span>
-                        <span>{art.readTime}</span>
+                      <div className="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center text-[10px] text-slate-400 font-sans">
+                        <span className="font-semibold text-slate-600">by {art.author}</span>
+                        <span>{art.date}</span>
                       </div>
                     </div>
                   ))}
@@ -273,125 +454,8 @@ export default function App() {
               </div>
             </section>
 
-            {/* DETAILED LOCATIONS SECTION */}
-            <section className="py-20 bg-white">
-              <div className="max-w-7xl mx-auto px-4">
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                  <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3 py-1.5 rounded-full">
-                    Practice Locations
-                  </span>
-                  <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mt-4">
-                    Two State-of-the-Art New Jersey Offices
-                  </h2>
-                  <p className="text-slate-600 mt-4 text-xs md:text-sm">
-                    Dr. Bielory conducts detailed evaluations and specialized testing in both Springfield and Wall Township, equipped with modern ocular surface diagnostics and comfortable desensitization spaces.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                  {LOCATIONS.map((loc) => (
-                    <div key={loc.id} className="bg-slate-50 border border-slate-100 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-sm">
-                      <div>
-                        <div className="flex items-center gap-2 mb-4">
-                          <div className="bg-dominant-green-light p-2 rounded-lg text-dominant-green">
-                            <MapPin className="w-5 h-5" />
-                          </div>
-                          <h3 className="font-serif text-xl font-bold text-slate-950">{loc.city}</h3>
-                        </div>
-
-                        <p className="text-slate-600 text-xs md:text-sm leading-relaxed mb-6">
-                          {loc.address}
-                        </p>
-
-                        <div className="space-y-2.5 text-xs text-slate-600 border-t border-slate-200/60 pt-6">
-                          <div className="flex justify-between items-center hover:text-slate-900 transition-colors">
-                            <span className="font-semibold text-slate-400 uppercase tracking-widest text-[9px] block">Office Phone</span>
-                            <a href={`tel:${loc.phone.replace(/[^0-9]/g, "")}`} className="font-bold text-dominant-green hover:underline">
-                              {loc.phone}
-                            </a>
-                          </div>
-                          <div className="flex justify-between items-center text-slate-500">
-                            <span className="font-semibold text-slate-400 uppercase tracking-widest text-[9px] block">Office Fax</span>
-                            <span>{loc.fax}</span>
-                          </div>
-                        </div>
-
-                        {/* Hours table summary */}
-                        <div className="mt-6">
-                          <div className="font-semibold text-slate-400 uppercase tracking-widest text-[9px] mb-2 flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            <span>Clinic Operational Hours</span>
-                          </div>
-                          <div className="space-y-1.5 text-xs text-slate-600">
-                            {loc.hours.map((h, i) => (
-                              <div key={i} className="flex justify-between border-b border-slate-200/30 pb-1">
-                                <span className="font-medium text-slate-500">{h.day}</span>
-                                <span className="font-semibold text-slate-800">{h.hours}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="mt-8 pt-4 border-t border-slate-200/50 flex flex-wrap gap-4 justify-between items-center">
-                        <a
-                          href={loc.directionsUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-dominant-green hover:text-dominant-green-dark font-bold text-xs flex items-center gap-1 group"
-                        >
-                          <span>Get Map &amp; Directions</span>
-                          <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                        </a>
-
-                        <button
-                          onClick={() => {
-                            setPreselectedService("unspecified");
-                            setSelectedOffice(loc.id);
-                            setCurrentView("contact");
-                            window.scrollTo({ top: 0, behavior: "smooth" });
-                          }}
-                          className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-4 py-2 rounded-lg shadow-sm transition-colors"
-                        >
-                          Select Location &amp; Book
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* CALL TO ACTION ACCENT BANNER */}
-            <section className="bg-slate-950 text-white py-16 text-center px-4">
-              <div className="max-w-3xl mx-auto space-y-6">
-                <span className="text-dominant-orange font-semibold uppercase tracking-widest text-xs">
-                  Schedule Your Initial Clinical Consultation Today
-                </span>
-                <h2 className="font-serif text-2xl md:text-4xl font-bold tracking-tight text-white leading-tight">
-                  Take Your First Step Towards Lasting, Sustainable Relief
-                </h2>
-                <p className="text-slate-400 text-xs md:text-sm leading-relaxed max-w-xl mx-auto">
-                  Our professional clinic receptionists are available to guide you, verify your insurance coverage, and book your comprehensive dry-eye or allergy testing.
-                </p>
-                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
-                  <button
-                    onClick={handleBookClick}
-                    className="w-full sm:w-auto bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
-                  >
-                    <Calendar className="w-4 h-4" />
-                    <span>Interactive Scheduling Intake</span>
-                  </button>
-                  <a
-                    href="tel:9739129811"
-                    className="w-full sm:w-auto border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl hover:bg-slate-900 transition-all flex items-center justify-center gap-2"
-                  >
-                    <Phone className="w-4 h-4 text-dominant-orange" />
-                    <span>Call Springfield: (973) 912-9811</span>
-                  </a>
-                </div>
-              </div>
-            </section>
+            {/* 9. CREDIBILITY BADGES STRIP */}
+            <Credibility />
           </div>
         )}
 

@@ -8,84 +8,106 @@ interface HeroProps {
 
 export default function Hero({ onBookClick, onContactClick, setView }: HeroProps) {
   return (
-    <section className="relative bg-white pt-10 pb-20 md:py-24 border-b border-slate-50 font-sans overflow-hidden">
-      {/* Background soft color flares */}
-      <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 w-96 h-96 bg-dominant-green-light/50 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 left-0 translate-y-12 -translate-x-12 w-96 h-96 bg-dominant-orange-light/40 rounded-full blur-3xl -z-10" />
+    <section className="relative bg-slate-950 pt-10 pb-20 md:py-24 border-b border-slate-900 font-sans overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat scale-[1.02]"
+        style={{
+          backgroundImage: "url('/clinic_interior.png')",
+        }}
+      />
+      {/* Dark gradient overlay for extreme readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-slate-900/50 z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-20">
         {/* Left Side: Pitch and Headings */}
         <div className="lg:col-span-7 space-y-6 md:space-y-8 text-center lg:text-left">
           {/* Subtitle intro */}
-          <div className="inline-flex items-center gap-2 bg-dominant-green-light border border-dominant-green-light text-dominant-green-dark px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider animate-in fade-in slide-in-from-bottom-2 duration-300">
-            <Award className="w-4 h-4 text-dominant-green" />
+          <div className="inline-flex items-center gap-2 bg-emerald-950/50 border border-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <Award className="w-4 h-4 text-emerald-400" />
             <span>Come In and Meet &mdash; Leonard Bielory, M.D.</span>
           </div>
 
           {/* Headline */}
           <div className="space-y-4">
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-none">
-              The Leading Expert <br className="hidden sm:inline" />
-              in <span className="text-dominant-green relative">Allergies &amp; Asthma</span>
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none uppercase">
+              TREAT THE PATIENT,<br />
+              YOU ALWAYS WIN.
             </h1>
-            <p className="text-slate-600 text-sm sm:text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              With over 35 years of clinical and academic excellence at the NIH and Rutgers, Dr. Bielory provides elite diagnostics and advanced biologic therapies, specialized for dry eyes, chronic hives, and complex immunologies.
+            <p className="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Dr. Bielory uses a completely holistic approach to treat his patients. When examining a patient as a whole, and not as a subset of organs or symptoms, we increase the patients quality of life and fight against the real causes behind symptoms.
             </p>
           </div>
 
           {/* Call-to-actions */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <button
-              onClick={onBookClick}
+              onClick={() => {
+                setView("about");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
               className="flex items-center justify-center gap-2 bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 group"
             >
-              <Calendar className="w-4 h-4 shrink-0" />
-              <span>Book Appointment</span>
+              <span>Learn More</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </button>
             <button
-              onClick={onContactClick}
-              className="flex items-center justify-center gap-2 border border-slate-200 hover:border-slate-300 text-slate-700 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl hover:bg-slate-50 transition-all duration-300"
+              onClick={onBookClick}
+              className="flex items-center justify-center gap-2 border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl hover:bg-white/5 transition-all duration-300"
             >
-              <span>Contact Our Clinics</span>
+              <Calendar className="w-4 h-4 text-dominant-orange" />
+              <span>Book Appointment</span>
             </button>
           </div>
 
           {/* Minimal Key Badges list */}
-          <div className="pt-6 border-t border-slate-100 grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0">
+          <div className="pt-6 border-t border-slate-800 grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0">
             <div className="text-center lg:text-left">
-              <div className="font-serif text-2xl font-bold text-slate-900">35+</div>
-              <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">Years Practice</div>
+              <div className="font-serif text-2xl font-bold text-white">30+</div>
+              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">Years Practice</div>
             </div>
             <div className="text-center lg:text-left">
-              <div className="font-serif text-2xl font-bold text-slate-900">150+</div>
-              <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">Publications</div>
+              <div className="font-serif text-2xl font-bold text-white">150+</div>
+              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">Publications</div>
             </div>
             <div className="text-center lg:text-left">
-              <div className="font-serif text-2xl font-bold text-slate-900">10k+</div>
-              <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">Patients Helped</div>
+              <div className="font-serif text-2xl font-bold text-white">10k+</div>
+              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">Patients Helped</div>
             </div>
           </div>
         </div>
 
         {/* Right Side: Visual Accent / Clinical Trust Card */}
         <div className="lg:col-span-5 flex justify-center">
-          <div className="w-full max-w-[380px] bg-slate-50 rounded-3xl border border-slate-150 p-6 shadow-sm relative overflow-hidden group">
-            {/* Top graphic block */}
-            <div className="aspect-[4/3] bg-dominant-green-light rounded-2xl flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-dominant-green/5 group-hover:bg-dominant-green/0 transition-all duration-300" />
-              <div className="text-center p-4">
-                <BookOpen className="w-12 h-12 text-dominant-green mx-auto mb-3" />
-                <h3 className="font-serif font-bold text-slate-900 text-base">Nationally Renowned Scholar</h3>
-                <p className="text-[11px] text-dominant-green-dark font-bold uppercase tracking-wider mt-1">Ocular Surface Disease Expert</p>
+          <div className="w-full max-w-[380px] bg-slate-900/60 backdrop-blur-md rounded-3xl border border-white/10 p-6 shadow-2xl relative overflow-hidden group">
+            {/* Top graphic block showing Dr. Bielory's portrait */}
+            <div className="aspect-[4/3] rounded-2xl relative overflow-hidden border border-white/10">
+              <img 
+                src="/dr-bielory-portrait.png" 
+                alt="Dr. Leonard Bielory"
+                className="w-full h-full object-cover object-[center_15%] group-hover:scale-105 transition-transform duration-500"
+              />
+              {/* Gradient overlay for text legibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent" />
+              
+              {/* Overlay Content */}
+              <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+                <div>
+                  <h3 className="font-serif font-bold text-white text-base leading-tight">
+                    Leonard Bielory, M.D.
+                  </h3>
+                  <p className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider mt-0.5">
+                    Allergy &amp; Immunology Expert
+                  </p>
+                </div>
                 <button
                   onClick={() => {
                     setView("about");
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
-                  className="mt-4 bg-white hover:bg-dominant-green-light text-slate-800 border border-slate-200 text-[10px] font-bold px-4 py-2 rounded-lg transition-colors shadow-sm inline-block"
+                  className="bg-white/15 hover:bg-white/25 text-white border border-white/25 text-[10px] font-bold px-3 py-1.5 rounded-lg backdrop-blur-xs transition-all duration-300 shadow-sm"
                 >
-                  Read Doctor Biography
+                  View Bio
                 </button>
               </div>
             </div>
@@ -93,24 +115,24 @@ export default function Hero({ onBookClick, onContactClick, setView }: HeroProps
             {/* Credential highlight blocks */}
             <div className="mt-6 space-y-4">
               <div className="flex gap-3 items-start">
-                <div className="bg-dominant-green-light text-dominant-green p-1.5 rounded-lg shrink-0">
+                <div className="bg-emerald-950/60 text-emerald-400 border border-emerald-500/20 p-1.5 rounded-lg shrink-0">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 text-xs">Triple Board Fellowship Training</h4>
-                  <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">
+                  <h4 className="font-bold text-white text-xs">Triple Board Fellowship Training</h4>
+                  <p className="text-[11px] text-slate-300 mt-0.5 leading-snug">
                     Trained at the National Institutes of Health (NIH) with advanced specialized fellowships in ocular immunology.
                   </p>
                 </div>
               </div>
 
               <div className="flex gap-3 items-start">
-                <div className="bg-dominant-orange-light text-dominant-orange p-1.5 rounded-lg shrink-0">
+                <div className="bg-orange-950/60 text-dominant-orange border border-dominant-orange/20 p-1.5 rounded-lg shrink-0">
                   <Star className="w-4 h-4 fill-dominant-orange/20" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 text-xs">Consecutive 'Top Doctor' Awards</h4>
-                  <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">
+                  <h4 className="font-bold text-white text-xs">Consecutive 'Top Doctor' Awards</h4>
+                  <p className="text-[11px] text-slate-300 mt-0.5 leading-snug">
                     Consistently elected by peers to the annual New Jersey &amp; New York Metro Area Top Doctors list.
                   </p>
                 </div>

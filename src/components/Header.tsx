@@ -36,35 +36,14 @@ export default function Header({ currentView, setView, onBookClick }: HeaderProp
   };
 
   return (
-    <header className="w-full z-50">
-      {/* Top Utility Bar */}
-      <div className="bg-slate-900 text-slate-200 text-xs py-2 px-4 border-b border-slate-800 transition-all duration-300">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
-          <div className="flex flex-wrap justify-center md:justify-start gap-4 lg:gap-6 text-slate-300">
-            <span className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <MapPin className="w-3.5 h-3.5 text-dominant-green" />
-              <span>Springfield, NJ: <a href="tel:9739129811" className="font-semibold hover:underline hover:text-dominant-green">(973) 912-9811</a></span>
-            </span>
-            <span className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <MapPin className="w-3.5 h-3.5 text-dominant-green" />
-              <span>Wall Township, NJ: <a href="tel:7324490111" className="font-semibold hover:underline hover:text-dominant-green">(732) 449-0111</a></span>
-            </span>
-          </div>
-          <div className="flex items-center gap-4 text-[11px] font-medium tracking-wider uppercase text-slate-400">
-            <span>Holistic Allergy Care & Ocular Surface Disorders</span>
-            <span className="hidden sm:inline text-slate-600">|</span>
-            <span className="hidden sm:inline">Fellow, ACAAI & AAAAI</span>
-          </div>
-        </div>
-      </div>
-
+    <header className="w-full z-50 sticky top-0">
       {/* Main Navigation Bar */}
       <nav
         className={`w-full transition-all duration-300 ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-md py-3 border-b border-slate-100"
-            : "bg-white py-5 border-b border-slate-100"
-        } sticky top-0`}
+            ? "bg-white/95 backdrop-blur-md shadow-md py-1.5 border-b border-slate-100"
+            : "bg-white py-3 border-b border-slate-100"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           {/* Logo / Brand Name */}
@@ -75,7 +54,9 @@ export default function Header({ currentView, setView, onBookClick }: HeaderProp
             <img
               src="/Dr.-B-Private-Practice-logo-FINAL-2.26_410x.avif"
               alt="Dr. Leonard Bielory, MD - Allergy, Immunology & Ocular Care"
-              className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              className={`w-auto object-contain transition-all duration-300 group-hover:scale-[1.02] ${
+                isScrolled ? "h-8 md:h-9" : "h-9 md:h-11"
+              }`}
             />
           </button>
 
