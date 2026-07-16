@@ -12,7 +12,7 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
   const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
 
   // Helper function to map string names to Lucide Icon components
-  const getServiceIcon = (name: string, className: string = "w-6 h-6 text-teal-600") => {
+  const getServiceIcon = (name: string, className: string = "w-6 h-6 text-dominant-green") => {
     switch (name) {
       case "Eye":
         return <Eye className={className} />;
@@ -55,7 +55,7 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
       {/* Header section */}
       <div className="bg-slate-900 text-white py-16 px-4">
         <div className="max-w-7xl mx-auto text-center md:text-left">
-          <span className="text-teal-400 font-semibold tracking-widest uppercase text-xs">
+          <span className="text-dominant-orange font-semibold tracking-widest uppercase text-xs">
             Clinical Scope of Practice
           </span>
           <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
@@ -80,7 +80,7 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
               }}
               className={`px-4 py-2 text-xs md:text-sm font-semibold rounded-lg transition-all ${
                 selectedTab === tab.id
-                  ? "bg-teal-600 text-white shadow-sm"
+                  ? "bg-dominant-green text-white shadow-sm"
                   : "bg-slate-50 text-slate-600 hover:bg-slate-100"
               }`}
             >
@@ -90,8 +90,8 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
         </div>
 
         {/* Informational Notice */}
-        <div className="mt-8 bg-teal-50/50 border border-teal-500/20 rounded-2xl p-4 flex items-start gap-3 text-xs md:text-sm text-teal-800">
-          <AlertCircle className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
+        <div className="mt-8 bg-dominant-green-light/50 border border-dominant-green/20 rounded-2xl p-4 flex items-start gap-3 text-xs md:text-sm text-dominant-green-dark">
+          <AlertCircle className="w-5 h-5 text-dominant-green shrink-0 mt-0.5" />
           <div>
             <span className="font-bold">Holistic Patient-Centered Care</span>: Our diagnostics go deep to find the biological root cause. Clicking any service below reveals full symptoms profiles, specialized treatments, and clinical testing guidelines.
           </div>
@@ -106,20 +106,20 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
                 key={service.id}
                 className={`bg-white border rounded-2xl p-6 transition-all duration-300 ${
                   isExpanded
-                    ? "border-teal-500 shadow-md ring-1 ring-teal-500/10 md:col-span-2 lg:col-span-3"
+                    ? "border-dominant-green shadow-md ring-1 ring-dominant-green-glow md:col-span-2 lg:col-span-3"
                     : "border-slate-100 shadow-sm hover:shadow-md hover:border-slate-200"
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="bg-teal-50 p-3 rounded-xl text-teal-600">
+                    <div className="bg-dominant-green-light p-3 rounded-xl text-dominant-green">
                       {getServiceIcon(service.iconName, "w-6 h-6")}
                     </div>
                     <div>
-                      <h3 className="font-serif text-lg font-bold text-slate-900 group-hover:text-teal-600">
+                      <h3 className="font-serif text-lg font-bold text-slate-900 group-hover:text-dominant-green">
                         {service.title}
                       </h3>
-                      <span className="text-[10px] text-teal-600 uppercase font-bold tracking-wider">
+                      <span className="text-[10px] text-dominant-green uppercase font-bold tracking-wider">
                         Medical Specialty
                       </span>
                     </div>
@@ -127,7 +127,7 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
 
                   <button
                     onClick={() => toggleExpand(service.id)}
-                    className="p-1.5 rounded-lg hover:bg-slate-50 text-slate-500 hover:text-teal-600 transition-colors shrink-0"
+                    className="p-1.5 rounded-lg hover:bg-slate-50 text-slate-500 hover:text-dominant-green transition-colors shrink-0"
                     aria-label={isExpanded ? "Collapse service details" : "Expand service details"}
                   >
                     {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
@@ -152,7 +152,7 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
                       <div className="pt-4 flex flex-col sm:flex-row gap-3">
                         <button
                           onClick={() => onSelectService(service.id)}
-                          className="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs px-4 py-3 rounded-lg shadow-sm transition-colors text-center"
+                          className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-semibold text-xs px-4 py-3 rounded-lg shadow-sm transition-colors text-center"
                         >
                           Request Appointment for This
                         </button>
@@ -166,29 +166,29 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
                     </div>
 
                     <div className="lg:col-span-3 space-y-3 bg-slate-50 p-5 rounded-xl border border-slate-100">
-                      <h5 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-teal-700">
+                      <h5 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-dominant-green-dark">
                         <AlertCircle className="w-4 h-4" />
                         <span>Common Symptoms</span>
                       </h5>
                       <ul className="space-y-2">
                         {service.symptoms.map((sym, i) => (
                           <li key={i} className="text-xs text-slate-600 leading-relaxed flex items-start gap-1.5">
-                            <span className="text-teal-500 font-bold">•</span>
+                            <span className="text-dominant-green font-bold">•</span>
                             <span>{sym}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="lg:col-span-3 space-y-3 bg-indigo-50/40 p-5 rounded-xl border border-indigo-100/40">
-                      <h5 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-indigo-700">
+                    <div className="lg:col-span-3 space-y-3 bg-dominant-orange-light p-5 rounded-xl border border-dominant-orange-glow">
+                      <h5 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-dominant-orange-dark">
                         <CheckCircle2 className="w-4 h-4" />
                         <span>Diagnostics & Care</span>
                       </h5>
                       <ul className="space-y-2">
                         {service.treatments.map((t, i) => (
                           <li key={i} className="text-xs text-slate-600 leading-relaxed flex items-start gap-1.5">
-                            <span className="text-indigo-500 font-bold">•</span>
+                            <span className="text-dominant-orange font-bold">•</span>
                             <span>{t}</span>
                           </li>
                         ))}
@@ -199,14 +199,14 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
                   <div className="mt-4 flex justify-between items-center text-xs">
                     <button
                       onClick={() => toggleExpand(service.id)}
-                      className="text-teal-600 hover:text-teal-700 font-bold flex items-center gap-1 hover:underline"
+                      className="text-dominant-green hover:text-dominant-green-dark font-bold flex items-center gap-1 hover:underline"
                     >
                       <span>Learn more about symptoms & treatments</span>
                       <ChevronDown className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => onSelectService(service.id)}
-                      className="text-indigo-600 hover:text-indigo-700 font-semibold hover:underline"
+                      className="text-dominant-orange hover:text-dominant-orange-dark font-semibold hover:underline"
                     >
                       Request treatment &bull;
                     </button>
@@ -230,7 +230,7 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
           </p>
           <button
             onClick={() => onSelectService("unspecified")}
-            className="mt-6 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs md:text-sm px-6 py-3 rounded-lg shadow-md transition-all inline-block"
+            className="mt-6 bg-dominant-orange hover:bg-dominant-orange-dark text-white font-semibold text-xs md:text-sm px-6 py-3 rounded-lg shadow-md transition-all inline-block"
           >
             Schedule a Diagnostic Consultation
           </button>

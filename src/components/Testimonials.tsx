@@ -22,7 +22,7 @@ export default function Testimonials({ reviews }: TestimonialsProps) {
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-teal-600 bg-teal-50 px-3 py-1.5 rounded-full">
+          <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3 py-1.5 rounded-full">
             Patient Testimonials
           </span>
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mt-4">
@@ -65,7 +65,7 @@ export default function Testimonials({ reviews }: TestimonialsProps) {
               </div>
 
               {/* Treatment Badge */}
-              <div className="self-start sm:self-center bg-teal-50 border border-teal-100 text-teal-800 text-xs font-semibold px-3 py-1.5 rounded-lg">
+              <div className="self-start sm:self-center bg-dominant-green-light border border-dominant-green-light text-dominant-green-dark text-xs font-semibold px-3 py-1.5 rounded-lg">
                 Condition: <span className="font-bold">{reviews[activeIndex].condition}</span>
               </div>
             </div>
@@ -75,14 +75,14 @@ export default function Testimonials({ reviews }: TestimonialsProps) {
           <div className="flex justify-end gap-3 mt-8">
             <button
               onClick={prevReview}
-              className="p-2.5 rounded-full bg-white hover:bg-slate-100 text-slate-700 hover:text-teal-600 border border-slate-200 shadow-sm transition-all"
+              className="p-2.5 rounded-full bg-white hover:bg-slate-100 text-slate-700 hover:text-dominant-green border border-slate-200 shadow-sm transition-all"
               aria-label="Previous patient story"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={nextReview}
-              className="p-2.5 rounded-full bg-white hover:bg-slate-100 text-slate-700 hover:text-teal-600 border border-slate-200 shadow-sm transition-all"
+              className="p-2.5 rounded-full bg-white hover:bg-slate-100 text-slate-700 hover:text-dominant-green border border-slate-200 shadow-sm transition-all"
               aria-label="Next patient story"
             >
               <ChevronRight className="w-4 h-4" />

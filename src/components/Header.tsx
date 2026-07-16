@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Phone, MapPin, Menu, X, ChevronDown, Calendar, Stethoscope } from "lucide-react";
+import { Phone, MapPin, Menu, X, ChevronDown, Calendar } from "lucide-react";
 
 interface HeaderProps {
   currentView: string;
@@ -42,12 +42,12 @@ export default function Header({ currentView, setView, onBookClick }: HeaderProp
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
           <div className="flex flex-wrap justify-center md:justify-start gap-4 lg:gap-6 text-slate-300">
             <span className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <MapPin className="w-3.5 h-3.5 text-teal-400" />
-              <span>Springfield, NJ: <a href="tel:9739129811" className="font-semibold hover:underline hover:text-teal-400">(973) 912-9811</a></span>
+              <MapPin className="w-3.5 h-3.5 text-dominant-green" />
+              <span>Springfield, NJ: <a href="tel:9739129811" className="font-semibold hover:underline hover:text-dominant-green">(973) 912-9811</a></span>
             </span>
             <span className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <MapPin className="w-3.5 h-3.5 text-teal-400" />
-              <span>Wall Township, NJ: <a href="tel:7324490111" className="font-semibold hover:underline hover:text-teal-400">(732) 449-0111</a></span>
+              <MapPin className="w-3.5 h-3.5 text-dominant-green" />
+              <span>Wall Township, NJ: <a href="tel:7324490111" className="font-semibold hover:underline hover:text-dominant-green">(732) 449-0111</a></span>
             </span>
           </div>
           <div className="flex items-center gap-4 text-[11px] font-medium tracking-wider uppercase text-slate-400">
@@ -70,19 +70,13 @@ export default function Header({ currentView, setView, onBookClick }: HeaderProp
           {/* Logo / Brand Name */}
           <button
             onClick={() => handleNavClick("home")}
-            className="flex items-center gap-2 text-left group"
+            className="flex items-center text-left group"
           >
-            <div className="bg-teal-50 p-2 rounded-lg text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-all duration-300">
-              <Stethoscope className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="font-serif text-lg md:text-xl font-bold text-slate-900 tracking-tight leading-none">
-                Dr. Leonard Bielory, MD
-              </div>
-              <div className="text-[10px] md:text-xs text-teal-600 font-semibold uppercase tracking-wider mt-0.5">
-                Allergy, Immunology & Ocular Care
-              </div>
-            </div>
+            <img
+              src="/Dr.-B-Private-Practice-logo-FINAL-2.26_410x.avif"
+              alt="Dr. Leonard Bielory, MD - Allergy, Immunology & Ocular Care"
+              className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+            />
           </button>
 
           {/* Desktop Navigation */}
@@ -94,13 +88,13 @@ export default function Header({ currentView, setView, onBookClick }: HeaderProp
                   onClick={() => handleNavClick(item.id)}
                   className={`text-sm font-medium transition-colors relative py-1.5 ${
                     currentView === item.id
-                      ? "text-teal-600 font-semibold"
-                      : "text-slate-600 hover:text-teal-600"
+                      ? "text-dominant-green font-semibold"
+                      : "text-slate-600 hover:text-dominant-green"
                   }`}
                 >
                   {item.label}
                   {currentView === item.id && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-600 rounded-full" />
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-dominant-green rounded-full" />
                   )}
                 </button>
               ))}
@@ -109,7 +103,7 @@ export default function Header({ currentView, setView, onBookClick }: HeaderProp
             {/* Prominent CTA */}
             <button
               onClick={onBookClick}
-              className="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+              className="flex items-center gap-2 bg-dominant-orange hover:bg-dominant-orange-dark text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
             >
               <Calendar className="w-4 h-4" />
               <span>Book Appointment</span>
@@ -119,7 +113,7 @@ export default function Header({ currentView, setView, onBookClick }: HeaderProp
           {/* Mobile Menu Trigger */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-slate-700 hover:text-teal-600 hover:bg-slate-50 rounded-lg transition-colors"
+            className="lg:hidden p-2 text-slate-700 hover:text-dominant-green hover:bg-slate-50 rounded-lg transition-colors"
             aria-label="Toggle navigation menu"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -136,8 +130,8 @@ export default function Header({ currentView, setView, onBookClick }: HeaderProp
                   onClick={() => handleNavClick(item.id)}
                   className={`flex items-center justify-between text-left px-3 py-3 rounded-lg text-sm font-medium transition-all ${
                     currentView === item.id
-                      ? "bg-teal-50 text-teal-700 font-bold"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-teal-600"
+                      ? "bg-dominant-green-light text-dominant-green-dark font-bold"
+                      : "text-slate-700 hover:bg-slate-50 hover:text-dominant-green"
                   }`}
                 >
                   <span>{item.label}</span>
@@ -150,7 +144,7 @@ export default function Header({ currentView, setView, onBookClick }: HeaderProp
                 setIsMobileMenuOpen(false);
                 onBookClick();
               }}
-              className="flex items-center justify-center gap-2 w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 rounded-lg shadow-sm transition-colors"
+              className="flex items-center justify-center gap-2 w-full bg-dominant-orange hover:bg-dominant-orange-dark text-white font-semibold py-3 rounded-lg shadow-sm transition-colors"
             >
               <Calendar className="w-4 h-4" />
               <span>Book Appointment</span>

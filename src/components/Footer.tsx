@@ -62,11 +62,11 @@ export default function Footer({ locations, setView }: FooterProps) {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   required
-                  className="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-teal-500 flex-1 transition-colors"
+                  className="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-dominant-green flex-1 transition-colors"
                 />
                 <button
                   type="submit"
-                  className="bg-teal-600 hover:bg-teal-700 text-white rounded-lg p-2 flex items-center justify-center transition-all duration-200"
+                  className="bg-dominant-orange hover:bg-dominant-orange-dark text-white rounded-lg p-2 flex items-center justify-center transition-all duration-200"
                   aria-label="Subscribe"
                 >
                   <Send className="w-4 h-4" />
@@ -80,7 +80,7 @@ export default function Footer({ locations, setView }: FooterProps) {
         {locations.map((loc) => (
           <div key={loc.id} className="space-y-4">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-white border-b border-slate-800 pb-2 flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-teal-400" />
+              <MapPin className="w-4 h-4 text-dominant-green" />
               <span>{loc.city} Office</span>
             </h4>
             <p className="text-sm text-slate-400 leading-relaxed">
@@ -88,7 +88,7 @@ export default function Footer({ locations, setView }: FooterProps) {
             </p>
             <div className="space-y-2 text-xs">
               <div className="flex items-center gap-2 hover:text-white transition-colors">
-                <Phone className="w-3.5 h-3.5 text-teal-500 shrink-0" />
+                <Phone className="w-3.5 h-3.5 text-dominant-green shrink-0" />
                 <span>P: </span>
                 <a href={`tel:${loc.phone.replace(/[^0-9]/g, "")}`} className="hover:underline">
                   {loc.phone}
@@ -98,7 +98,7 @@ export default function Footer({ locations, setView }: FooterProps) {
                 <Printer className="w-3.5 h-3.5 text-slate-600 shrink-0" />
                 <span>F: {loc.fax}</span>
               </div>
-              <div className="pt-2 flex items-center gap-1.5 text-teal-400 hover:text-teal-300 transition-colors">
+              <div className="pt-2 flex items-center gap-1.5 text-dominant-green hover:text-dominant-green-dark transition-colors">
                 <Clock className="w-3.5 h-3.5" />
                 <span className="font-medium">Hours:</span>
               </div>
@@ -121,27 +121,27 @@ export default function Footer({ locations, setView }: FooterProps) {
           </h4>
           <ul className="space-y-2.5 text-sm">
             <li>
-              <button onClick={() => handleNavClick("home")} className="hover:text-teal-400 transition-colors">
+              <button onClick={() => handleNavClick("home")} className="hover:text-dominant-green transition-colors">
                 Home Page
               </button>
             </li>
             <li>
-              <button onClick={() => handleNavClick("about")} className="hover:text-teal-400 transition-colors">
+              <button onClick={() => handleNavClick("about")} className="hover:text-dominant-green transition-colors">
                 About Dr. Bielory
               </button>
             </li>
             <li>
-              <button onClick={() => handleNavClick("services")} className="hover:text-teal-400 transition-colors">
+              <button onClick={() => handleNavClick("services")} className="hover:text-dominant-green transition-colors">
                 Allergy & Dry Eye Services
               </button>
             </li>
             <li>
-              <button onClick={() => handleNavClick("resources")} className="hover:text-teal-400 transition-colors">
+              <button onClick={() => handleNavClick("resources")} className="hover:text-dominant-green transition-colors">
                 Patient Resources & Articles
               </button>
             </li>
             <li>
-              <button onClick={() => handleNavClick("contact")} className="hover:text-teal-400 transition-colors">
+              <button onClick={() => handleNavClick("contact")} className="hover:text-dominant-green transition-colors">
                 Contact & Office Locations
               </button>
             </li>

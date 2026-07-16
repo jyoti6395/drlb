@@ -36,7 +36,7 @@ export default function App() {
 
   // Helper to map icon names to components for the home page preview cards
   const getServiceIcon = (name: string) => {
-    const className = "w-5 h-5 text-teal-600";
+    const className = "w-5 h-5 text-dominant-green";
     switch (name) {
       case "Eye":
         return <Eye className={className} />;
@@ -56,7 +56,7 @@ export default function App() {
   };
 
   return (
-    <div className="bg-white min-h-screen flex flex-col justify-between selection:bg-teal-500/10 selection:text-teal-900">
+    <div className="bg-white min-h-screen flex flex-col justify-between selection:bg-dominant-green/10 selection:text-dominant-green-dark">
       {/* Header element */}
       <Header currentView={currentView} setView={setCurrentView} onBookClick={handleBookClick} />
 
@@ -75,13 +75,13 @@ export default function App() {
             <section className="py-20 bg-slate-50 border-b border-slate-100">
               <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 <div className="lg:col-span-6 space-y-6">
-                  <span className="text-xs font-bold uppercase tracking-widest text-teal-600 bg-teal-50 px-3 py-1.5 rounded-full">
+                  <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3 py-1.5 rounded-full">
                     Practice Philosophy
                   </span>
                   <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
                     “Treat the Patient, You Always Win”
                   </h2>
-                  <blockquote className="border-l-4 border-teal-600 pl-4 italic text-slate-700 text-sm md:text-base leading-relaxed">
+                  <blockquote className="border-l-4 border-dominant-green pl-4 italic text-slate-700 text-sm md:text-base leading-relaxed">
                     "When we take the time to explain the science of an allergy or immune disorder, we give patients back their control. Medicine is a partnership based on education and mutual trust."
                   </blockquote>
                   <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
@@ -93,7 +93,7 @@ export default function App() {
                         setCurrentView("about");
                         window.scrollTo({ top: 0, behavior: "smooth" });
                       }}
-                      className="text-teal-600 hover:text-teal-700 font-bold text-xs sm:text-sm flex items-center gap-1 hover:underline group"
+                      className="text-dominant-green hover:text-dominant-green-dark font-bold text-xs sm:text-sm flex items-center gap-1 hover:underline group"
                     >
                       <span>Read Dr. Bielory's full academic credentials &amp; background</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -104,30 +104,30 @@ export default function App() {
                 {/* Right decorative visual box */}
                 <div className="lg:col-span-6 flex justify-center">
                   <div className="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm max-w-md w-full relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-4 opacity-5 text-teal-600">
+                    <div className="absolute top-0 right-0 p-4 opacity-5 text-dominant-green">
                       <Heart className="w-40 h-40" />
                     </div>
                     <h3 className="font-serif text-lg font-bold text-slate-950 mb-4 flex items-center gap-2">
-                      <Heart className="w-5 h-5 text-teal-600 fill-teal-600/15" />
+                      <Heart className="w-5 h-5 text-dominant-green fill-dominant-green/15" />
                       <span>The Holistic Care Advantage</span>
                     </h3>
                     <ul className="space-y-4 text-xs text-slate-600">
                       <li className="flex gap-2.5">
-                        <span className="text-teal-500 font-bold shrink-0">•</span>
+                        <span className="text-dominant-green font-bold shrink-0">•</span>
                         <div>
                           <strong className="text-slate-900 block">Root-Cause Analysis</strong>
                           <span>Differentiating ocular allergies from general dry eye via advanced multi-point lipid film tear assays.</span>
                         </div>
                       </li>
                       <li className="flex gap-2.5">
-                        <span className="text-teal-500 font-bold shrink-0">•</span>
+                        <span className="text-dominant-green font-bold shrink-0">•</span>
                         <div>
                           <strong className="text-slate-900 block">Environmental Management</strong>
                           <span>Providing detailed pollen count mappings and home trigger isolation guides instead of just symptom masking.</span>
                         </div>
                       </li>
                       <li className="flex gap-2.5">
-                        <span className="text-teal-500 font-bold shrink-0">•</span>
+                        <span className="text-dominant-green font-bold shrink-0">•</span>
                         <div>
                           <strong className="text-slate-900 block">Advanced Biologics Coordination</strong>
                           <span>Targeting IL-4 and IL-5 immune cascades directly for severe hives, eczema, and asthma.</span>
@@ -145,7 +145,7 @@ export default function App() {
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12">
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-widest text-teal-600 bg-teal-50 px-3 py-1.5 rounded-full">
+                    <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3 py-1.5 rounded-full">
                       Clinical Scope
                     </span>
                     <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mt-4">
@@ -175,10 +175,10 @@ export default function App() {
                       className="bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-slate-200/80 transition-all flex flex-col justify-between group"
                     >
                       <div>
-                        <div className="bg-slate-50 p-3 rounded-xl inline-block text-teal-600 group-hover:bg-teal-50 transition-colors">
+                        <div className="bg-slate-50 p-3 rounded-xl inline-block text-dominant-green group-hover:bg-dominant-green-light transition-colors">
                           {getServiceIcon(service.iconName)}
                         </div>
-                        <h3 className="font-serif text-base font-bold text-slate-900 mt-4 group-hover:text-teal-600 transition-colors">
+                        <h3 className="font-serif text-base font-bold text-slate-900 mt-4 group-hover:text-dominant-green transition-colors">
                           {service.title}
                         </h3>
                         <p className="text-slate-600 text-xs mt-2.5 leading-relaxed">
@@ -192,13 +192,13 @@ export default function App() {
                             setCurrentView("services");
                             window.scrollTo({ top: 0, behavior: "smooth" });
                           }}
-                          className="text-slate-500 hover:text-teal-600 hover:underline"
+                          className="text-slate-500 hover:text-dominant-green hover:underline"
                         >
                           View symptoms &bull;
                         </button>
                         <button
                           onClick={() => handleRequestService(service.id)}
-                          className="text-teal-600 hover:text-teal-700 font-bold flex items-center gap-0.5 group/btn"
+                          className="text-dominant-orange hover:text-dominant-orange-dark font-bold flex items-center gap-0.5 group/btn"
                         >
                           <span>Book Treatment</span>
                           <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
@@ -222,7 +222,7 @@ export default function App() {
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-widest text-teal-600 bg-teal-50 px-3 py-1.5 rounded-full">
+                    <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3 py-1.5 rounded-full">
                       Educational Literature
                     </span>
                     <h2 className="font-serif text-3xl font-bold text-slate-900 tracking-tight mt-4">
@@ -234,7 +234,7 @@ export default function App() {
                       setCurrentView("resources");
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className="text-teal-600 hover:text-teal-700 font-bold text-xs sm:text-sm flex items-center gap-1 hover:underline group"
+                    className="text-dominant-green hover:text-dominant-green-dark font-bold text-xs sm:text-sm flex items-center gap-1 hover:underline group"
                   >
                     <span>Browse All Educational Literature</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -253,10 +253,10 @@ export default function App() {
                       className="bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-slate-200 cursor-pointer transition-all flex flex-col justify-between group"
                     >
                       <div>
-                        <div className="text-[10px] text-teal-600 font-bold uppercase tracking-wider mb-2">
+                        <div className="text-[10px] text-dominant-green font-bold uppercase tracking-wider mb-2">
                           {art.category}
                         </div>
-                        <h3 className="font-serif font-bold text-slate-900 text-sm md:text-base leading-snug group-hover:text-teal-600 transition-colors line-clamp-2">
+                        <h3 className="font-serif font-bold text-slate-900 text-sm md:text-base leading-snug group-hover:text-dominant-green transition-colors line-clamp-2">
                           {art.title}
                         </h3>
                         <p className="text-slate-500 text-xs mt-3 leading-relaxed line-clamp-3">
@@ -277,7 +277,7 @@ export default function App() {
             <section className="py-20 bg-white">
               <div className="max-w-7xl mx-auto px-4">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                  <span className="text-xs font-bold uppercase tracking-widest text-teal-600 bg-teal-50 px-3 py-1.5 rounded-full">
+                  <span className="text-xs font-bold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-3 py-1.5 rounded-full">
                     Practice Locations
                   </span>
                   <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mt-4">
@@ -293,7 +293,7 @@ export default function App() {
                     <div key={loc.id} className="bg-slate-50 border border-slate-100 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-sm">
                       <div>
                         <div className="flex items-center gap-2 mb-4">
-                          <div className="bg-teal-50 p-2 rounded-lg text-teal-600">
+                          <div className="bg-dominant-green-light p-2 rounded-lg text-dominant-green">
                             <MapPin className="w-5 h-5" />
                           </div>
                           <h3 className="font-serif text-xl font-bold text-slate-950">{loc.city}</h3>
@@ -306,7 +306,7 @@ export default function App() {
                         <div className="space-y-2.5 text-xs text-slate-600 border-t border-slate-200/60 pt-6">
                           <div className="flex justify-between items-center hover:text-slate-900 transition-colors">
                             <span className="font-semibold text-slate-400 uppercase tracking-widest text-[9px] block">Office Phone</span>
-                            <a href={`tel:${loc.phone.replace(/[^0-9]/g, "")}`} className="font-bold text-teal-600 hover:underline">
+                            <a href={`tel:${loc.phone.replace(/[^0-9]/g, "")}`} className="font-bold text-dominant-green hover:underline">
                               {loc.phone}
                             </a>
                           </div>
@@ -338,7 +338,7 @@ export default function App() {
                           href={loc.directionsUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-teal-600 hover:text-teal-700 font-bold text-xs flex items-center gap-1 group"
+                          className="text-dominant-green hover:text-dominant-green-dark font-bold text-xs flex items-center gap-1 group"
                         >
                           <span>Get Map &amp; Directions</span>
                           <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -365,7 +365,7 @@ export default function App() {
             {/* CALL TO ACTION ACCENT BANNER */}
             <section className="bg-slate-950 text-white py-16 text-center px-4">
               <div className="max-w-3xl mx-auto space-y-6">
-                <span className="text-teal-400 font-semibold uppercase tracking-widest text-xs">
+                <span className="text-dominant-orange font-semibold uppercase tracking-widest text-xs">
                   Schedule Your Initial Clinical Consultation Today
                 </span>
                 <h2 className="font-serif text-2xl md:text-4xl font-bold tracking-tight text-white leading-tight">
@@ -377,7 +377,7 @@ export default function App() {
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
                   <button
                     onClick={handleBookClick}
-                    className="w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
                   >
                     <Calendar className="w-4 h-4" />
                     <span>Interactive Scheduling Intake</span>
@@ -386,7 +386,7 @@ export default function App() {
                     href="tel:9739129811"
                     className="w-full sm:w-auto border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl hover:bg-slate-900 transition-all flex items-center justify-center gap-2"
                   >
-                    <Phone className="w-4 h-4 text-teal-400" />
+                    <Phone className="w-4 h-4 text-dominant-orange" />
                     <span>Call Springfield: (973) 912-9811</span>
                   </a>
                 </div>

@@ -39,7 +39,7 @@ export default function ResourcesView() {
           {/* Back button */}
           <button
             onClick={() => setReadingArticleId(null)}
-            className="flex items-center gap-2 text-slate-600 hover:text-teal-600 font-semibold text-xs mb-8 transition-colors group"
+            className="flex items-center gap-2 text-slate-600 hover:text-dominant-green font-semibold text-xs mb-8 transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             <span>Back to Education Center</span>
@@ -49,7 +49,7 @@ export default function ResourcesView() {
           <article className="bg-white rounded-3xl border border-slate-100 p-6 md:p-10 shadow-sm">
             {/* Metadata headers */}
             <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 mb-4">
-              <span className="bg-teal-50 text-teal-700 font-bold px-2.5 py-1 rounded-md">
+              <span className="bg-dominant-green-light text-dominant-green-dark font-bold px-2.5 py-1 rounded-md">
                 {activeArticle.category}
               </span>
               <span className="flex items-center gap-1">
@@ -69,7 +69,7 @@ export default function ResourcesView() {
 
             {/* Author Block */}
             <div className="flex items-center gap-3 border-y border-slate-100 py-4 mb-8">
-              <div className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center text-teal-600 font-bold text-sm">
+              <div className="w-10 h-10 rounded-full bg-dominant-green-light flex items-center justify-center text-dominant-green font-bold text-sm">
                 LB
               </div>
               <div>
@@ -94,7 +94,7 @@ export default function ResourcesView() {
                   return (
                     <div key={idx} className="pl-4 space-y-2 py-2">
                       {paragraph.split("\n").map((li, lIdx) => (
-                        <p key={lIdx} className="text-slate-600 pl-2 border-l-2 border-teal-500 italic">
+                        <p key={lIdx} className="text-slate-600 pl-2 border-l-2 border-dominant-green italic">
                           {li.trim()}
                         </p>
                       ))}
@@ -106,9 +106,9 @@ export default function ResourcesView() {
             </div>
 
             {/* Doctor Note */}
-            <div className="mt-12 bg-slate-50 border-l-4 border-teal-600 p-6 rounded-r-xl">
+            <div className="mt-12 bg-slate-50 border-l-4 border-dominant-green p-6 rounded-r-xl">
               <div className="flex items-center gap-2 mb-2">
-                <ShieldAlert className="w-5 h-5 text-teal-600 shrink-0" />
+                <ShieldAlert className="w-5 h-5 text-dominant-green shrink-0" />
                 <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
                   Patient Medical Disclaimer
                 </h4>
@@ -122,7 +122,7 @@ export default function ResourcesView() {
             <div className="mt-8 border-t border-slate-100 pt-6 flex flex-wrap justify-between items-center gap-4">
               <button
                 onClick={handlePrint}
-                className="flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-teal-600 border border-slate-200 hover:border-slate-300 px-4 py-2.5 rounded-lg transition-colors"
+                className="flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-dominant-green border border-slate-200 hover:border-slate-300 px-4 py-2.5 rounded-lg transition-colors"
               >
                 <Printer className="w-4 h-4" />
                 <span>Print or Save as PDF for Appointment</span>
@@ -146,7 +146,7 @@ export default function ResourcesView() {
       {/* Banner */}
       <div className="bg-slate-900 text-white py-16 px-4">
         <div className="max-w-7xl mx-auto text-center md:text-left">
-          <span className="text-teal-400 font-semibold tracking-widest uppercase text-xs">
+          <span className="text-dominant-orange font-semibold tracking-widest uppercase text-xs">
             Patient Education Center
           </span>
           <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
@@ -171,7 +171,7 @@ export default function ResourcesView() {
                 placeholder="Search articles & keywords..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-teal-500 focus:bg-white transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
               />
             </div>
 
@@ -214,7 +214,7 @@ export default function ResourcesView() {
                   className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-slate-200 cursor-pointer transition-all flex flex-col justify-between group"
                 >
                   <div>
-                    <div className="flex justify-between items-center text-[10px] text-teal-600 uppercase font-bold tracking-wider mb-3">
+                    <div className="flex justify-between items-center text-[10px] text-dominant-green uppercase font-bold tracking-wider mb-3">
                       <span>{article.category}</span>
                       <span className="flex items-center gap-1 text-slate-400 normal-case font-medium">
                         <Clock className="w-3 h-3" />
@@ -222,7 +222,7 @@ export default function ResourcesView() {
                       </span>
                     </div>
 
-                    <h3 className="font-serif font-bold text-slate-900 text-base leading-snug group-hover:text-teal-600 transition-colors line-clamp-2">
+                    <h3 className="font-serif font-bold text-slate-900 text-base leading-snug group-hover:text-dominant-green transition-colors line-clamp-2">
                       {article.title}
                     </h3>
 
@@ -236,7 +236,7 @@ export default function ResourcesView() {
                       <User className="w-3.5 h-3.5 text-slate-400" />
                       {article.author}
                     </span>
-                    <span className="text-teal-600 font-bold group-hover:underline">Read Guide &rarr;</span>
+                    <span className="text-dominant-green font-bold group-hover:underline">Read Guide &rarr;</span>
                   </div>
                 </div>
               ))}
@@ -256,21 +256,21 @@ export default function ResourcesView() {
             </p>
             <div className="space-y-3.5 pt-2 text-xs">
               <div className="flex items-start gap-2.5">
-                <span className="bg-amber-100 text-amber-800 w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] shrink-0">1</span>
+                <span className="bg-dominant-orange-light text-dominant-orange w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] shrink-0">1</span>
                 <div>
                   <span className="font-semibold text-slate-900 block">Stop Antihistamines</span>
                   <span className="text-slate-500">Cease taking oral antihistamines (e.g., Claritin, Zyrtec, Allegra) 5-7 days before skin prick testing.</span>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
-                <span className="bg-amber-100 text-amber-800 w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] shrink-0">2</span>
+                <span className="bg-dominant-orange-light text-dominant-orange w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] shrink-0">2</span>
                 <div>
                   <span className="font-semibold text-slate-900 block">Patch Testing (Avoid Water)</span>
                   <span className="text-slate-500">Contact patch testing stays on your back for 48-72 hours. Do not shower, wet, or scratch your back during this diagnostic window.</span>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
-                <span className="bg-amber-100 text-amber-800 w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] shrink-0">3</span>
+                <span className="bg-dominant-orange-light text-dominant-orange w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] shrink-0">3</span>
                 <div>
                   <span className="font-semibold text-slate-900 block">Inhalers & asthma drugs</span>
                   <span className="text-slate-500">Do NOT stop asthma inhalers or chronic controller medications unless specifically instructed by Dr. Bielory.</span>
@@ -285,7 +285,7 @@ export default function ResourcesView() {
             <p className="text-slate-300 text-xs mt-2 leading-relaxed">
               Dr. Bielory regularly uploads new educational literature explaining pollen counts, mold spore waves, dry eye immunology, and food allergens. Let our team know if there is a topic you wish to see addressed.
             </p>
-            <div className="mt-5 text-xs text-teal-400 font-bold">
+            <div className="mt-5 text-xs text-dominant-orange font-bold">
               Call our offices during business hours for support.
             </div>
           </div>

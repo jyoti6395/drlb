@@ -62,7 +62,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
       {/* Banner */}
       <div className="bg-slate-900 text-white py-16 px-4">
         <div className="max-w-7xl mx-auto text-center md:text-left">
-          <span className="text-teal-400 font-semibold tracking-widest uppercase text-xs">
+          <span className="text-dominant-orange font-semibold tracking-widest uppercase text-xs">
             Connect With Our Clinics
           </span>
           <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
@@ -91,7 +91,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                 >
                   <div>
                     <h3 className="font-serif text-lg font-bold text-slate-950 flex items-center gap-1.5">
-                      <MapPin className="w-5 h-5 text-teal-600 shrink-0" />
+                      <MapPin className="w-5 h-5 text-dominant-green shrink-0" />
                       <span>{loc.city}</span>
                     </h3>
                     <p className="text-xs text-slate-600 mt-2 leading-relaxed">
@@ -100,9 +100,9 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
 
                     <div className="space-y-1.5 text-xs text-slate-600 mt-4 border-t border-slate-200/50 pt-4">
                       <div className="flex items-center gap-2">
-                        <Phone className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                        <Phone className="w-3.5 h-3.5 text-dominant-green shrink-0" />
                         <span className="font-semibold">Phone:</span>
-                        <a href={`tel:${loc.phone.replace(/[^0-9]/g, "")}`} className="hover:underline text-teal-700 font-medium">
+                        <a href={`tel:${loc.phone.replace(/[^0-9]/g, "")}`} className="hover:underline text-dominant-green-dark font-medium">
                           {loc.phone}
                         </a>
                       </div>
@@ -119,7 +119,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                       href={loc.directionsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-teal-600 hover:text-teal-700 font-bold text-xs flex items-center gap-1 group"
+                      className="text-dominant-green hover:text-dominant-green-dark font-bold text-xs flex items-center gap-1 group"
                     >
                       <span>Get Detailed Directions</span>
                       <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -177,7 +177,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
                       placeholder="e.g. Mary Smith"
-                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-teal-500 transition-colors"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-dominant-green transition-colors"
                     />
                   </div>
                   <div>
@@ -190,7 +190,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
                       placeholder="e.g. mary@gmail.com"
-                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-teal-500 transition-colors"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-dominant-green transition-colors"
                     />
                   </div>
                 </div>
@@ -204,7 +204,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                     value={contactPhone}
                     onChange={(e) => setContactPhone(e.target.value)}
                     placeholder="e.g. (973) 555-0199"
-                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-teal-500 transition-colors"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-dominant-green transition-colors"
                   />
                 </div>
 
@@ -218,7 +218,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                     value={contactMessage}
                     onChange={(e) => setContactMessage(e.target.value)}
                     placeholder="Please specify any billing queries, generic requests, or administrative questions. Do not enter sensitive HIPAA-protected diagnostic details here."
-                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-teal-500 transition-colors"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-dominant-green transition-colors"
                   ></textarea>
                 </div>
 
@@ -242,13 +242,13 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                 <h3 className="font-serif text-lg md:text-xl font-bold text-slate-900">
                   Appointment Booking Intake
                 </h3>
-                <p className="text-[10px] text-teal-600 font-bold uppercase tracking-wider mt-0.5">
+                <p className="text-[10px] text-dominant-green font-bold uppercase tracking-wider mt-0.5">
                   Zocdoc-Integrated Scheduling Portal
                 </p>
               </div>
               {step < 4 && (
                 <div className="text-xs font-bold text-slate-400 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-full">
-                  Step <span className="text-teal-600">{step}</span> of 3
+                  Step <span className="text-dominant-green">{step}</span> of 3
                 </div>
               )}
             </div>
@@ -257,7 +257,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
             {step < 4 && (
               <div className="w-full bg-slate-100 h-1.5 rounded-full mb-6">
                 <div
-                  className="bg-teal-600 h-1.5 rounded-full transition-all duration-300"
+                  className="bg-dominant-green h-1.5 rounded-full transition-all duration-300"
                   style={{ width: `${(step / 3) * 100}%` }}
                 />
               </div>
@@ -278,14 +278,14 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                         onClick={() => setSelectedOffice(loc.id)}
                         className={`p-4 rounded-xl border text-left flex flex-col justify-between transition-all ${
                           selectedOffice === loc.id
-                            ? "border-teal-500 bg-teal-50/40 ring-1 ring-teal-500/10"
+                            ? "border-dominant-green bg-dominant-green-light/40 ring-1 ring-dominant-green-glow"
                             : "border-slate-200 hover:border-slate-300 bg-white"
                         }`}
                       >
                         <div className="flex justify-between items-center w-full">
                           <span className="font-bold text-slate-900 text-sm">{loc.city}</span>
                           {selectedOffice === loc.id && (
-                            <span className="bg-teal-600 text-white p-0.5 rounded-full shrink-0">
+                            <span className="bg-dominant-orange text-white p-0.5 rounded-full shrink-0">
                               <Check className="w-3 h-3" />
                             </span>
                           )}
@@ -305,7 +305,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                   <select
                     value={selectedService}
                     onChange={(e) => setSelectedService(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-3 text-xs md:text-sm text-slate-800 focus:outline-none focus:border-teal-500 focus:bg-white transition-all font-medium"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-3 text-xs md:text-sm text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all font-medium"
                   >
                     <option value="unspecified">General Allergy & Immune Consultation</option>
                     {SERVICES.map((s) => (
@@ -326,7 +326,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                     value={insuranceProvider}
                     onChange={(e) => setInsuranceProvider(e.target.value)}
                     placeholder="e.g., Blue Cross Blue Shield, Aetna, Cigna, Medicare"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-teal-500 focus:bg-white transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
                   />
                   <span className="text-[10px] text-slate-400 mt-1.5 block italic leading-snug">
                     *Dr. Bielory is an in-network provider for most Medicare, Horizon BCBS, Aetna, and Cigna plans. We will verify your benefits prior to your visit.
@@ -336,7 +336,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs md:text-sm px-5 py-3 rounded-lg shadow-sm hover:shadow-md transition-all w-full flex items-center justify-center gap-2"
+                  className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs md:text-sm px-5 py-3 rounded-lg shadow-sm hover:shadow-md transition-all w-full flex items-center justify-center gap-2"
                 >
                   <span>Continue to Patient Details</span>
                   <ArrowRight className="w-4 h-4" />
@@ -358,7 +358,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                       value={patientName}
                       onChange={(e) => setPatientName(e.target.value)}
                       placeholder="e.g. Mary Smith"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-teal-500 focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
                     />
                   </div>
                   <div>
@@ -370,7 +370,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                       required
                       value={patientDob}
                       onChange={(e) => setPatientDob(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-teal-500 focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
                     />
                   </div>
                 </div>
@@ -386,7 +386,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                       value={patientPhone}
                       onChange={(e) => setPatientPhone(e.target.value)}
                       placeholder="e.g. (973) 555-0199"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-teal-500 focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
                     />
                   </div>
                   <div>
@@ -399,7 +399,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                       value={patientEmail}
                       onChange={(e) => setPatientEmail(e.target.value)}
                       placeholder="e.g. mary@gmail.com"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-teal-500 focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
                     />
                   </div>
                 </div>
@@ -420,7 +420,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                         onClick={() => setPreferredTime(time.id)}
                         className={`p-3 rounded-lg border text-center flex flex-col justify-between transition-all ${
                           preferredTime === time.id
-                            ? "border-teal-500 bg-teal-50/40 font-semibold"
+                            ? "border-dominant-green bg-dominant-green-light/40 font-semibold"
                             : "border-slate-200 hover:border-slate-300 bg-white"
                         }`}
                       >
@@ -442,7 +442,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                   <button
                     type="button"
                     onClick={() => setStep(3)}
-                    className="bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs md:text-sm px-5 py-3 rounded-lg shadow-sm hover:shadow-md transition-all flex-1 text-center"
+                    className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs md:text-sm px-5 py-3 rounded-lg shadow-sm hover:shadow-md transition-all flex-1 text-center"
                   >
                     Review Booking Summary
                   </button>
@@ -503,7 +503,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                     value={specialNotes}
                     onChange={(e) => setSpecialNotes(e.target.value)}
                     placeholder="Briefly describe your symptoms (e.g. chronic red itchy eyes, persistent hives) to help us prepare your clinical chart."
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-teal-500 focus:bg-white transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
                   ></textarea>
                 </div>
 
@@ -525,7 +525,7 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                   </button>
                   <button
                     type="submit"
-                    className="bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs md:text-sm px-5 py-3 rounded-lg shadow-sm hover:shadow-md transition-all flex-1 text-center"
+                    className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs md:text-sm px-5 py-3 rounded-lg shadow-sm hover:shadow-md transition-all flex-1 text-center"
                   >
                     Request Appointment Slot
                   </button>
@@ -582,26 +582,26 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
                 </div>
 
                 {/* Patient checklist */}
-                <div className="space-y-3 bg-teal-50/40 border border-teal-100 p-5 rounded-2xl">
+                <div className="space-y-3 bg-dominant-green-light/40 border border-dominant-green-light p-5 rounded-2xl">
                   <h5 className="font-serif text-slate-950 text-xs font-bold flex items-center gap-1.5">
-                    <ClipboardList className="w-4 h-4 text-teal-600" />
+                    <ClipboardList className="w-4 h-4 text-dominant-green" />
                     <span>Important Preparation Checklist:</span>
                   </h5>
                   <ul className="space-y-2 text-[11px] text-slate-600 leading-relaxed">
                     <li className="flex items-start gap-1.5">
-                      <span className="text-teal-600 font-bold">•</span>
+                      <span className="text-dominant-green font-bold">•</span>
                       <span>
                         <strong>Allergy Testing Preparation:</strong> If scheduled for skin prick testing, please stop all oral antihistamines <strong>5 to 7 days prior</strong> to this appointment.
                       </span>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-teal-600 font-bold">•</span>
+                      <span className="text-dominant-green font-bold">•</span>
                       <span>
                         <strong>What to Bring:</strong> Government photo ID, physical health insurance cards, and a printed list of your active medications and dosages.
                       </span>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-teal-600 font-bold">•</span>
+                      <span className="text-dominant-green font-bold">•</span>
                       <span>
                         <strong>Coordination Notice:</strong> Our medical receptionist will contact you via phone or email within <strong>4 to 8 business hours</strong> to lock in your exact arrival time.
                       </span>

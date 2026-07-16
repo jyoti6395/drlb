@@ -3,25 +3,25 @@ import { Award, BookOpen, ShieldCheck, CheckCircle2, Star } from "lucide-react";
 export default function Credibility() {
   const credentials = [
     {
-      icon: <Award className="w-8 h-8 text-amber-600" />,
+      icon: <Award className="w-8 h-8 text-dominant-orange" />,
       org: "AAAAI Fellow",
       detail: "American Academy of Allergy, Asthma & Immunology",
       type: "Distinguished Fellow"
     },
     {
-      icon: <ShieldCheck className="w-8 h-8 text-teal-600" />,
+      icon: <ShieldCheck className="w-8 h-8 text-dominant-green" />,
       org: "ACAAI Fellow",
       detail: "American College of Allergy, Asthma & Immunology",
       type: "Board Certified Specialist"
     },
     {
-      icon: <BookOpen className="w-8 h-8 text-indigo-600" />,
+      icon: <BookOpen className="w-8 h-8 text-dominant-orange" />,
       org: "Rutgers NJMS",
       detail: "Former Professor of Medicine & Ophthalmic Immunology",
       type: "Academic Pioneer"
     },
     {
-      icon: <Star className="w-8 h-8 text-amber-500 fill-amber-500/20" />,
+      icon: <Star className="w-8 h-8 text-dominant-orange fill-dominant-orange/20" />,
       org: "Castle Connolly",
       detail: "Recognized as 'Top Doctor' for Allergy & Immunology",
       type: "20+ Consecutive Years"
@@ -49,9 +49,9 @@ export default function Credibility() {
               <div>
                 <div className="font-serif font-bold text-slate-900 text-sm flex items-center gap-1">
                   <span>{cred.org}</span>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-500" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-dominant-green" />
                 </div>
-                <div className="text-[10px] text-teal-600 font-semibold uppercase tracking-wider mt-0.5">
+                <div className="text-[10px] text-dominant-green font-semibold uppercase tracking-wider mt-0.5">
                   {cred.type}
                 </div>
                 <div className="text-xs text-slate-500 mt-1 leading-relaxed">

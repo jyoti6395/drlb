@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+:root {
+  --dominant-green: #0f6937;
+  --dominant-orange: #f0502d;
+}
+
+@theme {
+  --color-dominant-green: var(--dominant-green);
+  --color-dominant-green-dark: #0b4e28;
+  --color-dominant-green-light: #e7f3ec;
+  --color-dominant-green-glow: rgba(15, 105, 55, 0.15);
+
+  --color-dominant-orange: var(--dominant-orange);
+  --color-dominant-orange-dark: #d23d1d;
+  --color-dominant-orange-light: #fff3f0;
+  --color-dominant-orange-glow: rgba(240, 80, 45, 0.15);
+}
