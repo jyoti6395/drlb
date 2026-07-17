@@ -278,15 +278,6 @@ export default function AboutView({ setView, onBookClick }: AboutViewProps) {
               >
                 Book an Appointment
               </button>
-              <button
-                onClick={() => {
-                  setView("contact");
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
-                className="border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-semibold text-xs md:text-sm px-5 py-3 rounded-lg transition-all duration-300 cursor-pointer"
-              >
-                Our Locations
-              </button>
             </div>
           </div>
         </div>

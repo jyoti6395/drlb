@@ -5,9 +5,11 @@ import { Eye, ShieldCheck, Pill, Wind, ClipboardList, Activity, ChevronDown, Che
 
 interface ServicesViewProps {
   onSelectService: (serviceId: string) => void;
+  setView: (view: string) => void;
+  onBookClick: () => void;
 }
 
-export default function ServicesView({ onSelectService }: ServicesViewProps) {
+export default function ServicesView({ onSelectService, setView, onBookClick }: ServicesViewProps) {
   const [selectedTab, setSelectedTab] = useState<"all" | "ocular" | "testing" | "immunology">("all");
   const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
 
@@ -51,19 +53,40 @@ export default function ServicesView({ onSelectService }: ServicesViewProps) {
   };
 
   return (
-    <div className="bg-white min-h-screen pt-6 pb-20 font-sans">
-      {/* Header section */}
-      <div className="bg-slate-900 text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto text-center md:text-left">
-          <span className="text-dominant-orange font-semibold tracking-widest uppercase text-xs">
-            Clinical Scope of Practice
-          </span>
-          <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
-            Allergy, Immunology & Dry Eye Services
-          </h1>
-          <p className="text-slate-400 mt-3 text-sm md:text-base max-w-2xl leading-relaxed">
-            Dr. Bielory provides state-of-the-art diagnostic evaluations and highly targeted therapeutic interventions, specialized particularly in ocular surface diseases, drug desensitizations, and biologic treatments.
-          </p>
+    <div className="bg-white min-h-screen pb-20 font-sans">
+      {/* Page Header Banner */}
+      <div className="relative bg-slate-950 py-12 md:py-16 px-4 border-b border-slate-900 shadow-md overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat scale-[1.02]"
+          style={{
+            backgroundImage: "url('/clinic_interior.png')",
+          }}
+        />
+        {/* Dark gradient overlay for extreme readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/85 to-slate-900/60 z-10" />
+
+        <div className="relative z-20 max-w-7xl mx-auto">
+          {/* Header text content */}
+          <div className="max-w-3xl space-y-4">
+            <span className="text-dominant-orange font-bold tracking-widest uppercase text-xs px-2.5 py-1 rounded bg-dominant-orange-glow border border-dominant-orange/20 inline-block animate-pulse">
+              Clinical Scope of Practice
+            </span>
+            <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mt-1">
+              Allergy, Immunology &amp; Dry Eye Services
+            </h1>
+            <p className="text-slate-300 text-sm md:text-base max-w-2xl leading-relaxed">
+              Dr. Bielory provides state-of-the-art diagnostic evaluations and highly targeted therapeutic interventions, specialized particularly in ocular surface diseases, drug desensitizations, and biologic treatments.
+            </p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <button
+                onClick={onBookClick}
+                className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-semibold text-xs md:text-sm px-5 py-3 rounded-lg shadow-md transition-all duration-300 hover:shadow-dominant-orange-glow cursor-pointer"
+              >
+                Book an Appointment
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 

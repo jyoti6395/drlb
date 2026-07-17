@@ -1,13 +1,29 @@
-import { useState, ReactNode } from "react";
+import React, { useState, ReactNode } from "react";
 import { ARTICLES } from "../data";
 import { Article } from "../types";
 import { Search, BookOpen, Calendar, Clock, User, ArrowLeft, Printer, ShieldAlert, FileText, CheckCircle } from "lucide-react";
 
-export default function ResourcesView() {
+interface ResourcesViewProps {
+  setView: (view: string) => void;
+  onBookClick: () => void;
+}
+
+export default function ResourcesView({ setView, onBookClick }: ResourcesViewProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [readingArticleId, setReadingArticleId] = useState<string | null>(null);
   const [isPrintedAlert, setIsPrintedAlert] = useState(false);
+  const [subEmail, setSubEmail] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const handleSubscribeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (subEmail) {
+      setIsSubscribed(true);
+      setSubEmail("");
+      setTimeout(() => setIsSubscribed(false), 5000);
+    }
+  };
 
   const categories = ["all", "Ocular Immunology", "Advanced Immunology", "Drug Allergy"];
 
@@ -48,7 +64,7 @@ export default function ResourcesView() {
           {/* Article Card Wrapper */}
           <article className="bg-white rounded-3xl border border-slate-100 p-6 md:p-10 shadow-sm">
             {activeArticle.imageUrl && (
-              <div className="w-full h-64 md:h-[400px] overflow-hidden rounded-3xl mb-8 border border-slate-150">
+              <div className="w-full h-64 md:h-[400px] overflow-hidden rounded-3xl mb-8 bg-white">
                 <img
                   src={activeArticle.imageUrl}
                   alt={activeArticle.title}
@@ -115,7 +131,7 @@ export default function ResourcesView() {
             </div>
 
             {/* Doctor Note */}
-            <div className="mt-12 bg-slate-50 border-l-4 border-dominant-green p-6 rounded-r-xl">
+            {/* <div className="mt-12 bg-slate-50 border-l-4 border-dominant-green p-6 rounded-r-xl">
               <div className="flex items-center gap-2 mb-2">
                 <ShieldAlert className="w-5 h-5 text-dominant-green shrink-0" />
                 <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
@@ -125,10 +141,10 @@ export default function ResourcesView() {
               <p className="text-xs text-slate-500 leading-relaxed">
                 The information provided in this educational guide is for general health literacy only. It is not a substitute for professional medical advice, comprehensive diagnosis, or supervised clinical therapy. If you are experiencing acute allergy, asthma, or eye distress, please schedule an in-person consultation or contact your emergency health services immediately.
               </p>
-            </div>
+            </div> */}
 
             {/* Print / Action Row */}
-            <div className="mt-8 border-t border-slate-100 pt-6 flex flex-wrap justify-between items-center gap-4">
+            {/* <div className="mt-8 border-t border-slate-100 pt-6 flex flex-wrap justify-between items-center gap-4">
               <button
                 onClick={handlePrint}
                 className="flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-dominant-green border border-slate-200 hover:border-slate-300 px-4 py-2.5 rounded-lg transition-colors"
@@ -143,7 +159,7 @@ export default function ResourcesView() {
                   <span>Document loaded in system print dialogue...</span>
                 </div>
               )}
-            </div>
+            </div> */}
           </article>
         </div>
       </div>
@@ -151,19 +167,40 @@ export default function ResourcesView() {
   }
 
   return (
-    <div className="bg-white min-h-screen pt-6 pb-20 font-sans">
-      {/* Banner */}
-      <div className="bg-slate-900 text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto text-center md:text-left">
-          <span className="text-dominant-orange font-semibold tracking-widest uppercase text-xs">
-            Patient Education Center
-          </span>
-          <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
-            Allergy & Immunology Guides
-          </h1>
-          <p className="text-slate-400 mt-3 text-sm md:text-base max-w-2xl leading-relaxed">
-            Access certified healthcare information, research breakdowns, and clinical guidelines compiled directly by Dr. Bielory to support your journey to long-term relief.
-          </p>
+    <div className="bg-white min-h-screen pb-20 font-sans">
+      {/* Page Header Banner */}
+      <div className="relative bg-slate-950 py-12 md:py-16 px-4 border-b border-slate-900 shadow-md overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat scale-[1.02]"
+          style={{
+            backgroundImage: "url('/clinic_interior.png')",
+          }}
+        />
+        {/* Dark gradient overlay for extreme readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/85 to-slate-900/60 z-10" />
+
+        <div className="relative z-20 max-w-7xl mx-auto">
+          {/* Header text content */}
+          <div className="max-w-3xl space-y-4">
+            <span className="text-dominant-orange font-bold tracking-widest uppercase text-xs px-2.5 py-1 rounded bg-dominant-orange-glow border border-dominant-orange/20 inline-block animate-pulse">
+              Patient Education Center
+            </span>
+            <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mt-1">
+              Allergy &amp; Immunology Guides
+            </h1>
+            <p className="text-slate-300 text-sm md:text-base max-w-2xl leading-relaxed">
+              Access certified healthcare information, research breakdowns, and clinical guidelines compiled directly by Dr. Bielory to support your journey to long-term relief.
+            </p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <button
+                onClick={onBookClick}
+                className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-semibold text-xs md:text-sm px-5 py-3 rounded-lg shadow-md transition-all duration-300 hover:shadow-dominant-orange-glow cursor-pointer"
+              >
+                Book an Appointment
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -224,11 +261,11 @@ export default function ResourcesView() {
                 >
                   <div>
                     {article.imageUrl && (
-                      <div className="w-full overflow-hidden rounded-xl mb-4 border border-slate-150">
+                      <div className="h-48 w-full overflow-hidden rounded-xl mb-4 bg-white flex items-center justify-center p-2">
                         <img
                           src={article.imageUrl}
                           alt={article.title}
-                          className="w-full h-auto bg-white transition-transform duration-500 group-hover:scale-105"
+                          className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
                     )}
@@ -298,7 +335,7 @@ export default function ResourcesView() {
           </div>
 
           {/* Support line card */}
-          <div className="bg-slate-950 text-white p-6 rounded-2xl relative overflow-hidden">
+          {/* <div className="bg-slate-950 text-white p-6 rounded-2xl relative overflow-hidden">
             <h3 className="font-serif text-lg font-bold">Have an Educational Question?</h3>
             <p className="text-slate-300 text-xs mt-2 leading-relaxed">
               Dr. Bielory regularly uploads new educational literature explaining pollen counts, mold spore waves, dry eye immunology, and food allergens. Let our team know if there is a topic you wish to see addressed.
@@ -306,6 +343,40 @@ export default function ResourcesView() {
             <div className="mt-5 text-xs text-dominant-orange font-bold">
               Call our offices during business hours for support.
             </div>
+          </div> */}
+
+          {/* Subscription Card */}
+          <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm relative overflow-hidden">
+            <h3 className="font-serif text-lg font-bold text-slate-900 mb-2">Subscribe</h3>
+            <p className="text-slate-600 text-xs leading-relaxed mb-4">
+              Sign up to get the latest on sales, new releases and more …
+            </p>
+            {isSubscribed ? (
+              <div className="bg-emerald-50 border border-emerald-500/20 text-emerald-800 p-4 rounded-xl text-center text-xs">
+                <span className="font-bold">Subscription successful!</span> Thank you for subscribing.
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribeSubmit} className="space-y-3">
+                <div>
+                  <label className="sr-only" htmlFor="sub-email">Email address</label>
+                  <input
+                    type="email"
+                    id="sub-email"
+                    required
+                    value={subEmail}
+                    onChange={(e) => setSubEmail(e.target.value)}
+                    placeholder="Email address"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-colors"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs px-5 py-3 rounded-lg shadow-sm transition-all w-full text-center cursor-pointer"
+                >
+                  Subscribe
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>

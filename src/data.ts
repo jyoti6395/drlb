@@ -129,17 +129,17 @@ export const LOCATIONS: OfficeLocation[] = [
   {
     id: "springfield",
     city: "Springfield, NJ",
-    address: "100 Morris Avenue, Suite 105, Springfield, NJ 07081",
-    phone: "(973) 912-9811",
+    address: "400 Mountain Ave, Springfield, NJ 07081",
+    phone: "(973) 912-9817",
     fax: "(973) 912-9812",
-    mapUrl: "https://maps.google.com/?q=100+Morris+Avenue+Springfield+NJ+07081",
-    directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=100+Morris+Avenue+Suite+105+Springfield+NJ+07081",
+    mapUrl: "https://www.google.com/maps/place/400+Mountain+Ave,+Springfield,+NJ+07081",
+    directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=400+Mountain+Ave+Springfield+NJ+07081",
     hours: [
-      { day: "Monday", hours: "9:00 AM - 5:00 PM" },
-      { day: "Tuesday", hours: "9:00 AM - 6:30 PM" },
-      { day: "Wednesday", hours: "9:00 AM - 5:00 PM" },
-      { day: "Thursday", hours: "10:00 AM - 7:00 PM" },
-      { day: "Friday", hours: "9:00 AM - 4:00 PM" },
+      { day: "Monday", hours: "Closed" },
+      { day: "Tuesday", hours: "9:00 AM - 5:00 PM" },
+      { day: "Wednesday", hours: "1:00 PM - 5:00 PM" },
+      { day: "Thursday", hours: "9:00 AM - 5:00 PM" },
+      { day: "Friday", hours: "Closed" },
       { day: "Saturday", hours: "Closed" },
       { day: "Sunday", hours: "Closed" }
     ]
@@ -147,18 +147,18 @@ export const LOCATIONS: OfficeLocation[] = [
   {
     id: "wall",
     city: "Wall Township, NJ",
-    address: "1967 Highway 34, Suite 101, Wall Township, NJ 07719",
-    phone: "(732) 449-0111",
+    address: "1937 Route 35, Wall Township, NJ 07719",
+    phone: "(973) 912-9817",
     fax: "(732) 449-0112",
-    mapUrl: "https://maps.google.com/?q=1967+Highway+34+Wall+Township+NJ+07719",
-    directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=1967+Highway+34+Suite+101+Wall+Township+NJ+07719",
+    mapUrl: "https://www.google.com/maps/place/1937+NJ-35,+Wall+Township,+NJ+07719",
+    directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=1937+NJ-35+Wall+Township+NJ+07719",
     hours: [
       { day: "Monday", hours: "Closed" },
       { day: "Tuesday", hours: "9:00 AM - 5:00 PM" },
-      { day: "Wednesday", hours: "9:00 AM - 6:00 PM" },
-      { day: "Thursday", hours: "Closed" },
-      { day: "Friday", hours: "9:00 AM - 5:00 PM" },
-      { day: "Saturday", hours: "8:30 AM - 12:30 PM (Bi-weekly)" },
+      { day: "Wednesday", hours: "1:00 PM - 5:00 PM" },
+      { day: "Thursday", hours: "9:00 AM - 5:00 PM" },
+      { day: "Friday", hours: "Closed" },
+      { day: "Saturday", hours: "Closed" },
       { day: "Sunday", hours: "Closed" }
     ]
   }

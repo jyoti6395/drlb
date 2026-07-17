@@ -1,25 +1,18 @@
 import { useState, FormEvent } from "react";
-import { LOCATIONS, SERVICES } from "../data";
-import { MapPin, Phone, Printer, Clock, ExternalLink, Check, Calendar, CheckCircle, User, ArrowRight, ClipboardList, Shield } from "lucide-react";
+import { LOCATIONS } from "../data";
+import { MapPin, Phone, Clock, ExternalLink, CheckCircle, ArrowRight } from "lucide-react";
 
 interface ContactViewProps {
-  preselectedServiceId?: string;
+  preselectedServiceId?: string; // Kept for prop compatibility
+  setView: (view: string) => void;
+  onBookClick: () => void;
 }
 
-export default function ContactView({ preselectedServiceId = "unspecified" }: ContactViewProps) {
-  // Booking Form State
-  const [step, setStep] = useState(1);
-  const [selectedOffice, setSelectedOffice] = useState("springfield");
-  const [selectedService, setSelectedService] = useState(preselectedServiceId);
-  const [insuranceProvider, setInsuranceProvider] = useState("");
-  const [patientName, setPatientName] = useState("");
-  const [patientDob, setPatientDob] = useState("");
-  const [patientPhone, setPatientPhone] = useState("");
-  const [patientEmail, setPatientEmail] = useState("");
-  const [preferredTime, setPreferredTime] = useState("morning");
-  const [specialNotes, setSpecialNotes] = useState("");
-
-  // Simple Contact Form State
+export default function ContactView({ 
+  onBookClick
+}: ContactViewProps) {
+  // Contact Form State
+  const [contactLocation, setContactLocation] = useState("springfield");
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactPhone, setContactPhone] = useState("");
@@ -38,595 +31,273 @@ export default function ContactView({ preselectedServiceId = "unspecified" }: Co
     }
   };
 
-  const handleBookingSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (patientName && patientPhone && patientEmail && patientDob) {
-      setStep(4); // Receipt step
-    }
-  };
-
-  const resetBooking = () => {
-    setStep(1);
-    setPatientName("");
-    setPatientDob("");
-    setPatientPhone("");
-    setPatientEmail("");
-    setInsuranceProvider("");
-    setSpecialNotes("");
-  };
-
-  const activeServiceObj = SERVICES.find((s) => s.id === selectedService);
-
   return (
-    <div className="bg-white min-h-screen pt-6 pb-20 font-sans">
-      {/* Banner */}
-      <div className="bg-slate-900 text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto text-center md:text-left">
-          <span className="text-dominant-orange font-semibold tracking-widest uppercase text-xs">
-            Connect With Our Clinics
-          </span>
-          <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
-            Locations & Appointment Booking
-          </h1>
-          <p className="text-slate-400 mt-3 text-sm md:text-base max-w-2xl leading-relaxed">
-            Ready to live allergy-free? Schedule a clinical evaluation at our Springfield or Wall Township offices, or submit a message to our administrative staff.
-          </p>
+    <div className="bg-slate-50/50 min-h-screen pb-12 font-sans">
+      {/* Page Header Banner */}
+      <div className="relative bg-slate-950 py-10 md:py-12 px-4 border-b border-slate-900 shadow-md overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat scale-[1.02]"
+          style={{
+            backgroundImage: "url('/clinic_interior.png')",
+          }}
+        />
+        {/* Dark gradient overlay for extreme readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/85 to-slate-900/60 z-10" />
+
+        <div className="relative z-20 max-w-7xl mx-auto">
+          {/* Header text content */}
+          <div className="max-w-3xl space-y-3">
+            <span className="text-dominant-orange font-bold tracking-widest uppercase text-xs px-2.5 py-1 rounded bg-dominant-orange-glow border border-dominant-orange/20 inline-block animate-pulse">
+              Connect With Our Clinics
+            </span>
+            <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mt-1">
+              Locations &amp; Contact Us
+            </h1>
+            <p className="text-slate-300 text-sm md:text-base max-w-2xl leading-relaxed">
+              Have a question or want to get in touch? Select an office location and send us a message, or book your appointment online.
+            </p>
+            <div className="pt-2">
+              <button
+                onClick={onBookClick}
+                className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-semibold text-xs md:text-sm px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:shadow-dominant-orange-glow/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer"
+              >
+                Book Online
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
-        {/* Left column: 2 Locations & Contact Message Form */}
-        <div className="lg:col-span-6 space-y-12">
-          {/* 2 Locations cards */}
-          <div className="space-y-6">
-            <h2 className="font-serif text-2xl font-bold text-slate-900 border-b border-slate-100 pb-2">
-              Our Professional Medical Offices
+      {/* Instant Scheduling Callout Banner */}
+      <div className="max-w-7xl mx-auto px-4 mt-6">
+        <div className="p-5 rounded-2xl bg-gradient-to-r from-dominant-green-light to-dominant-green-light/40 border border-dominant-green/10 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm hover:shadow-md transition-all duration-300">
+          <div className="space-y-1 text-center md:text-left">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-dominant-green bg-white/80 border border-dominant-green/10 px-2.5 py-1 rounded-md inline-block">
+              Need to Schedule an Appointment?
+            </span>
+            <h2 className="font-serif text-lg md:text-xl font-bold text-slate-900">
+              Secure your clinical slot instantly via Zocdoc.
             </h2>
+            <p className="text-xs text-slate-550 max-w-xl leading-relaxed">
+              Skip the queue and book online to instantly confirm your clinical appointment time at either of our locations.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onBookClick}
+            className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-lg shadow-md hover:shadow-dominant-orange-glow transition-all duration-300 flex items-center gap-1.5 cursor-pointer shrink-0 animate-pulse"
+          >
+            <span>Book an Appointment</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {LOCATIONS.map((loc) => (
-                <div
-                  key={loc.id}
-                  className="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex flex-col justify-between"
-                >
-                  <div>
-                    <h3 className="font-serif text-lg font-bold text-slate-950 flex items-center gap-1.5">
-                      <MapPin className="w-5 h-5 text-dominant-green shrink-0" />
-                      <span>{loc.city}</span>
-                    </h3>
-                    <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                      {loc.address}
-                    </p>
+      <div className="max-w-7xl mx-auto px-4 mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Left column: 2 Locations - Stacked Vertically for generous space */}
+        <div className="lg:col-span-5 space-y-4">
+          <h2 id="locations-section" className="font-serif text-xl font-bold text-slate-900 border-b border-slate-100 pb-1.5">
+            Our Professional Medical Offices
+          </h2>
 
-                    <div className="space-y-1.5 text-xs text-slate-600 mt-4 border-t border-slate-200/50 pt-4">
-                      <div className="flex items-center gap-2">
-                        <Phone className="w-3.5 h-3.5 text-dominant-green shrink-0" />
-                        <span className="font-semibold">Phone:</span>
-                        <a href={`tel:${loc.phone.replace(/[^0-9]/g, "")}`} className="hover:underline text-dominant-green-dark font-medium">
+          <div className="grid grid-cols-1 gap-4">
+            {LOCATIONS.map((loc) => (
+              <div
+                key={loc.id}
+                className="bg-white border border-slate-150 p-5 md:p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-slate-50/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                
+                <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start gap-4">
+                  <div className="space-y-3 flex-1">
+                    <div>
+                      <span className="text-[9px] font-extrabold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-2.5 py-1 rounded-md mb-1.5 inline-block">
+                        Clinical Facility
+                      </span>
+                      <h3 className="font-serif text-lg font-bold text-slate-950 flex items-center gap-2">
+                        <MapPin className="w-4.5 h-4.5 text-dominant-green shrink-0" />
+                        <span>{loc.city}, NJ</span>
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                        {loc.address}
+                      </p>
+                    </div>
+
+                    <div className="space-y-1.5 border-t border-slate-100 pt-3 max-w-sm">
+                      <div className="flex items-center gap-2 text-xs">
+                        <Phone className="w-4 h-4 text-dominant-green shrink-0" />
+                        <span className="font-medium text-slate-400">Phone:</span>
+                        <a href={`tel:${loc.phone.replace(/[^0-9]/g, "")}`} className="hover:underline font-bold text-dominant-green-dark">
                           {loc.phone}
                         </a>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Printer className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                        <span className="font-semibold">Fax:</span>
-                        <span>{loc.fax}</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-200/50">
+                  <div className="flex flex-col items-start sm:items-end gap-3 shrink-0 w-full sm:w-auto">
                     <a
                       href={loc.directionsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-dominant-green hover:text-dominant-green-dark font-bold text-xs flex items-center gap-1 group"
+                      className="bg-dominant-green-light hover:bg-dominant-green/20 text-dominant-green-dark font-bold text-[11px] px-3 py-2 rounded-lg transition-all duration-300 flex items-center gap-1 border border-dominant-green/10 w-full sm:w-auto justify-center"
                     >
-                      <span>Get Detailed Directions</span>
-                      <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      <span>Get Directions</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
 
-                    <div className="mt-4">
-                      <div className="text-[10px] font-bold uppercase text-slate-400 mb-1 flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        <span>Hours of Operation</span>
+                    <div className="w-full">
+                      <div className="text-[10px] font-bold uppercase text-slate-400 mb-1 flex items-center sm:justify-end gap-1">
+                        <Clock className="w-3.5 h-3.5" />
+                        <span>Clinic Hours</span>
                       </div>
-                      <div className="space-y-0.5 text-[10px] text-slate-500">
+                      <div className="space-y-0.5 text-[10px] text-slate-600 bg-slate-50/80 p-2 rounded-xl border border-slate-100/60 min-w-[150px]">
                         {loc.hours.map((h, i) => (
-                          <div key={i} className="flex justify-between">
-                            <span className="font-semibold">{h.day}:</span>
-                            <span>{h.hours}</span>
+                          <div key={i} className="flex justify-between gap-4">
+                            <span className="font-bold text-slate-500">{h.day}</span>
+                            <span className="text-slate-800 font-medium">{h.hours}</span>
                           </div>
                         ))}
                       </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Contact Message Form */}
-          <div className="bg-slate-50 border border-slate-100 p-8 rounded-3xl">
-            <h3 className="font-serif text-xl font-bold text-slate-900 mb-2">
-              Send a Secure Administrative Message
-            </h3>
-            <p className="text-xs text-slate-500 mb-6 leading-relaxed">
-              For general billing questions, records transfers, or general inquiries, please fill out the administrative form below. Our clinical coordinators will respond within 24 business hours.
-            </p>
-
-            {isContactSubmitted ? (
-              <div className="bg-emerald-50 border border-emerald-500/20 text-emerald-800 p-6 rounded-2xl flex items-start gap-3">
-                <CheckCircle className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-sm">Message Sent Successfully!</h4>
-                  <p className="text-xs text-emerald-700 mt-1 leading-relaxed">
-                    Thank you for contacting Dr. Bielory's administrative team. Your inquiry has been routed to our medical coordinator. We will review your message and reply shortly.
-                  </p>
-                </div>
               </div>
-            ) : (
-              <form onSubmit={handleContactSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                      Your Full Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={contactName}
-                      onChange={(e) => setContactName(e.target.value)}
-                      placeholder="e.g. Mary Smith"
-                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-dominant-green transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={contactEmail}
-                      onChange={(e) => setContactEmail(e.target.value)}
-                      placeholder="e.g. mary@gmail.com"
-                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-dominant-green transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Phone Number (Optional)
-                  </label>
-                  <input
-                    type="tel"
-                    value={contactPhone}
-                    onChange={(e) => setContactPhone(e.target.value)}
-                    placeholder="e.g. (973) 555-0199"
-                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-dominant-green transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Your Message
-                  </label>
-                  <textarea
-                    rows={4}
-                    required
-                    value={contactMessage}
-                    onChange={(e) => setContactMessage(e.target.value)}
-                    placeholder="Please specify any billing queries, generic requests, or administrative questions. Do not enter sensitive HIPAA-protected diagnostic details here."
-                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-dominant-green transition-colors"
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="bg-slate-900 hover:bg-slate-850 text-white font-bold text-xs px-5 py-3 rounded-lg shadow-sm transition-all w-full text-center"
-                >
-                  Send Administrative Message
-                </button>
-              </form>
-            )}
+            ))}
           </div>
         </div>
 
-        {/* Right column: Interactive Clinical Appointment Intake Form */}
-        <div className="lg:col-span-6">
-          <div className="bg-white border border-slate-200 p-8 rounded-3xl shadow-sm relative overflow-hidden">
-            {/* Header / Step indicator */}
-            <div className="flex justify-between items-center border-b border-slate-100 pb-4 mb-6">
-              <div>
-                <h3 className="font-serif text-lg md:text-xl font-bold text-slate-900">
-                  Appointment Booking Intake
-                </h3>
-                <p className="text-[10px] text-dominant-green font-bold uppercase tracking-wider mt-0.5">
-                  Zocdoc-Integrated Scheduling Portal
-                </p>
-              </div>
-              {step < 4 && (
-                <div className="text-xs font-bold text-slate-400 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-full">
-                  Step <span className="text-dominant-green">{step}</span> of 3
-                </div>
-              )}
+        {/* Right column: Contact Section */}
+        <div id="contact-form-section" className="lg:col-span-7 space-y-4">
+          <div>
+            <span className="text-[9px] font-extrabold uppercase tracking-widest text-dominant-green bg-dominant-green-light px-2.5 py-1 rounded-md mb-3 inline-block">
+              Get in touch today.
+            </span>
+            <h3 className="font-serif text-xl font-bold text-slate-900 mb-1.5">
+              Get in touch with us today!
+            </h3>
+            <p className="text-xs text-slate-550 leading-relaxed">
+              Use this form to send us any general questions you may have. If you would like to book online, please visit our booking page for more details.
+            </p>
+          </div>
+
+          {/* Interactive Office Location Tabs - Outside the Form Card */}
+          <div className="bg-white border border-slate-150 p-4 rounded-xl shadow-sm">
+            <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
+              Select Clinic Office Location
+            </label>
+            <div className="grid grid-cols-2 gap-1.5 bg-slate-100/60 p-1 rounded-lg border border-slate-200/40">
+              <button
+                type="button"
+                onClick={() => setContactLocation("springfield")}
+                className={`py-2 px-2.5 text-xs font-bold rounded-md transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer ${
+                  contactLocation === "springfield"
+                    ? "bg-white text-dominant-green shadow-sm ring-1 ring-slate-200/50 scale-[1.01]"
+                    : "text-slate-500 hover:text-slate-800 hover:bg-white/30"
+                }`}
+              >
+                <MapPin className={`w-3.5 h-3.5 ${contactLocation === "springfield" ? "text-dominant-green" : "text-slate-400"}`} />
+                <span>Springfield Office</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setContactLocation("wall")}
+                className={`py-2 px-2.5 text-xs font-bold rounded-md transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer ${
+                  contactLocation === "wall"
+                    ? "bg-white text-dominant-green shadow-sm ring-1 ring-slate-200/50 scale-[1.01]"
+                    : "text-slate-500 hover:text-slate-800 hover:bg-white/30"
+                }`}
+              >
+                <MapPin className={`w-3.5 h-3.5 ${contactLocation === "wall" ? "text-dominant-green" : "text-slate-400"}`} />
+                <span>Wall Township Office</span>
+              </button>
             </div>
+          </div>
 
-            {/* PROGRESS BAR */}
-            {step < 4 && (
-              <div className="w-full bg-slate-100 h-1.5 rounded-full mb-6">
-                <div
-                  className="bg-dominant-green h-1.5 rounded-full transition-all duration-300"
-                  style={{ width: `${(step / 3) * 100}%` }}
-                />
-              </div>
-            )}
+          {/* Contact Message Form Card */}
+          <div className="bg-white border border-slate-150 p-6 md:p-8 rounded-2xl shadow-lg shadow-slate-100/30 relative overflow-hidden">
+            {/* Decorative colored blobs for rich visual appeal */}
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-dominant-green-glow rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-dominant-green-glow/10 rounded-full blur-2xl pointer-events-none" />
 
-            {/* STEP 1: Select Location & Concern */}
-            {step === 1 && (
-              <div className="space-y-6 animate-in fade-in slide-in-from-right-1 duration-200">
-                <div>
-                  <label className="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-3">
-                    1. Select Preferred Clinic Location
-                  </label>
-                  <div className="grid grid-cols-2 gap-4">
-                    {LOCATIONS.map((loc) => (
-                      <button
-                        key={loc.id}
-                        type="button"
-                        onClick={() => setSelectedOffice(loc.id)}
-                        className={`p-4 rounded-xl border text-left flex flex-col justify-between transition-all ${
-                          selectedOffice === loc.id
-                            ? "border-dominant-green bg-dominant-green-light/40 ring-1 ring-dominant-green-glow"
-                            : "border-slate-200 hover:border-slate-300 bg-white"
-                        }`}
-                      >
-                        <div className="flex justify-between items-center w-full">
-                          <span className="font-bold text-slate-900 text-sm">{loc.city}</span>
-                          {selectedOffice === loc.id && (
-                            <span className="bg-dominant-orange text-white p-0.5 rounded-full shrink-0">
-                              <Check className="w-3 h-3" />
-                            </span>
-                          )}
-                        </div>
-                        <span className="text-[10px] text-slate-500 mt-2 block leading-snug line-clamp-2">
-                          {loc.address}
-                        </span>
-                      </button>
-                    ))}
+            <div className="relative z-10">
+              {isContactSubmitted ? (
+                <div className="bg-emerald-50 border border-emerald-500/20 text-emerald-800 p-6 rounded-2xl flex items-start gap-3">
+                  <CheckCircle className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-bold text-sm">Message Sent Successfully!</h4>
+                    <p className="text-xs text-emerald-700 mt-1 leading-relaxed">
+                      Thank you for contacting Dr. Bielory's {contactLocation === "springfield" ? "Springfield" : "Wall Township"} office team. Your inquiry has been routed to our medical coordinator. We will review your message and reply shortly.
+                    </p>
                   </div>
                 </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-3">
-                    2. Select Primary Clinical Concern
-                  </label>
-                  <select
-                    value={selectedService}
-                    onChange={(e) => setSelectedService(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-3 text-xs md:text-sm text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all font-medium"
-                  >
-                    <option value="unspecified">General Allergy & Immune Consultation</option>
-                    {SERVICES.map((s) => (
-                      <option key={s.id} value={s.id}>
-                        {s.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2 flex justify-between items-center">
-                    <span>3. Insurance Provider</span>
-                    <span className="text-[10px] text-slate-400 lowercase font-medium">Most major insurances accepted</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={insuranceProvider}
-                    onChange={(e) => setInsuranceProvider(e.target.value)}
-                    placeholder="e.g., Blue Cross Blue Shield, Aetna, Cigna, Medicare"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
-                  />
-                  <span className="text-[10px] text-slate-400 mt-1.5 block italic leading-snug">
-                    *Dr. Bielory is an in-network provider for most Medicare, Horizon BCBS, Aetna, and Cigna plans. We will verify your benefits prior to your visit.
-                  </span>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setStep(2)}
-                  className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs md:text-sm px-5 py-3 rounded-lg shadow-sm hover:shadow-md transition-all w-full flex items-center justify-center gap-2"
-                >
-                  <span>Continue to Patient Details</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-
-            {/* STEP 2: Personal Details & Time */}
-            {step === 2 && (
-              <div className="space-y-6 animate-in fade-in slide-in-from-right-1 duration-200">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                      Patient's Legal Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={patientName}
-                      onChange={(e) => setPatientName(e.target.value)}
-                      placeholder="e.g. Mary Smith"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
-                    />
+              ) : (
+                <form onSubmit={handleContactSubmit} className="space-y-3.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                        Your Full Name
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={contactName}
+                        onChange={(e) => setContactName(e.target.value)}
+                        placeholder="e.g. Mary Smith"
+                        className="w-full bg-slate-50/50 border border-slate-200/80 rounded-lg px-3 py-2 text-xs md:text-sm text-slate-850 focus:outline-none focus:border-dominant-green focus:bg-white focus:ring-4 focus:ring-dominant-green-glow/20 transition-all duration-300"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={contactEmail}
+                        onChange={(e) => setContactEmail(e.target.value)}
+                        placeholder="e.g. mary@gmail.com"
+                        className="w-full bg-slate-50/50 border border-slate-200/80 rounded-lg px-3 py-2 text-xs md:text-sm text-slate-850 focus:outline-none focus:border-dominant-green focus:bg-white focus:ring-4 focus:ring-dominant-green-glow/20 transition-all duration-300"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                      Date of Birth
-                    </label>
-                    <input
-                      type="date"
-                      required
-                      value={patientDob}
-                      onChange={(e) => setPatientDob(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
-                    />
-                  </div>
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                      Mobile Phone
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                      Phone Number (Optional)
                     </label>
                     <input
                       type="tel"
-                      required
-                      value={patientPhone}
-                      onChange={(e) => setPatientPhone(e.target.value)}
+                      value={contactPhone}
+                      onChange={(e) => setContactPhone(e.target.value)}
                       placeholder="e.g. (973) 555-0199"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
+                      className="w-full bg-slate-50/50 border border-slate-200/80 rounded-lg px-3 py-2 text-xs md:text-sm text-slate-850 focus:outline-none focus:border-dominant-green focus:bg-white focus:ring-4 focus:ring-dominant-green-glow/20 transition-all duration-300"
                     />
                   </div>
+
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                      Email Address
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                      Your Message
                     </label>
-                    <input
-                      type="email"
+                    <textarea
+                      rows={3}
                       required
-                      value={patientEmail}
-                      onChange={(e) => setPatientEmail(e.target.value)}
-                      placeholder="e.g. mary@gmail.com"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
-                    />
+                      value={contactMessage}
+                      onChange={(e) => setContactMessage(e.target.value)}
+                      placeholder="Please specify any billing queries, generic requests, or administrative questions. Do not enter sensitive HIPAA-protected diagnostic details here."
+                      className="w-full bg-slate-50/50 border border-slate-200/80 rounded-lg px-3 py-2 text-xs md:text-sm text-slate-850 focus:outline-none focus:border-dominant-green focus:bg-white focus:ring-4 focus:ring-dominant-green-glow/20 transition-all duration-300"
+                    ></textarea>
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-3">
-                    Preferred Time of Day
-                  </label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { id: "morning", label: "Morning", hours: "9:00 AM - 12:00 PM" },
-                      { id: "afternoon", label: "Afternoon", hours: "12:00 PM - 4:00 PM" },
-                      { id: "evening", label: "Late Evening", hours: "4:00 PM - 7:00 PM" }
-                    ].map((time) => (
-                      <button
-                        key={time.id}
-                        type="button"
-                        onClick={() => setPreferredTime(time.id)}
-                        className={`p-3 rounded-lg border text-center flex flex-col justify-between transition-all ${
-                          preferredTime === time.id
-                            ? "border-dominant-green bg-dominant-green-light/40 font-semibold"
-                            : "border-slate-200 hover:border-slate-300 bg-white"
-                        }`}
-                      >
-                        <span className="text-xs text-slate-900 block">{time.label}</span>
-                        <span className="text-[9px] text-slate-400 mt-1 block">{time.hours}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setStep(1)}
-                    className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-4 py-3 rounded-lg transition-colors shrink-0"
-                  >
-                    Back
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setStep(3)}
-                    className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs md:text-sm px-5 py-3 rounded-lg shadow-sm hover:shadow-md transition-all flex-1 text-center"
-                  >
-                    Review Booking Summary
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* STEP 3: Summary Review */}
-            {step === 3 && (
-              <form onSubmit={handleBookingSubmit} className="space-y-6 animate-in fade-in slide-in-from-right-1 duration-200">
-                <div className="bg-slate-50 border border-slate-150 p-5 rounded-2xl space-y-4 text-xs">
-                  <h4 className="font-serif font-bold text-slate-900 text-sm border-b border-slate-200 pb-1.5">
-                    Consultation Summary Review
-                  </h4>
-
-                  <div className="grid grid-cols-2 gap-y-3 text-slate-600">
-                    <div>
-                      <span className="font-semibold text-slate-400 uppercase tracking-wider text-[9px] block">Patient Name</span>
-                      <span className="font-bold text-slate-900">{patientName}</span>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-slate-400 uppercase tracking-wider text-[9px] block">Date of Birth</span>
-                      <span className="font-bold text-slate-900">{patientDob}</span>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-slate-400 uppercase tracking-wider text-[9px] block">Clinic Location</span>
-                      <span className="font-bold text-slate-900 uppercase">
-                        {selectedOffice === "springfield" ? "Springfield, NJ" : "Wall Township, NJ"}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-slate-400 uppercase tracking-wider text-[9px] block">Insurance Provider</span>
-                      <span className="font-bold text-slate-900">{insuranceProvider || "None / Self-pay"}</span>
-                    </div>
-                    <div className="col-span-2">
-                      <span className="font-semibold text-slate-400 uppercase tracking-wider text-[9px] block">Primary Clinical Concern</span>
-                      <span className="font-bold text-slate-900">
-                        {activeServiceObj ? activeServiceObj.title : "General Allergy & Immune Consultation"}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-slate-400 uppercase tracking-wider text-[9px] block">Mobile Phone</span>
-                      <span className="font-bold text-slate-900">{patientPhone}</span>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-slate-400 uppercase tracking-wider text-[9px] block">Preferred Slot</span>
-                      <span className="font-bold text-slate-900 capitalize">{preferredTime} Block</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Clinical Symptoms / Message (Optional)
-                  </label>
-                  <textarea
-                    rows={3}
-                    value={specialNotes}
-                    onChange={(e) => setSpecialNotes(e.target.value)}
-                    placeholder="Briefly describe your symptoms (e.g. chronic red itchy eyes, persistent hives) to help us prepare your clinical chart."
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-dominant-green focus:bg-white transition-all"
-                  ></textarea>
-                </div>
-
-                {/* HIPAA consent */}
-                <div className="flex items-start gap-2 text-[10px] text-slate-500 leading-normal">
-                  <input type="checkbox" required className="mt-0.5" />
-                  <span>
-                    I authorize Dr. Bielory's clinics to contact me regarding my scheduling request, and certify that this information is transmitted securely.
-                  </span>
-                </div>
-
-                <div className="flex gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setStep(2)}
-                    className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-4 py-3 rounded-lg transition-colors shrink-0"
-                  >
-                    Back
-                  </button>
                   <button
                     type="submit"
-                    className="bg-dominant-orange hover:bg-dominant-orange-dark text-white font-bold text-xs md:text-sm px-5 py-3 rounded-lg shadow-sm hover:shadow-md transition-all flex-1 text-center"
+                    className="bg-dominant-green hover:bg-dominant-green-dark text-white font-bold text-xs md:text-sm px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 w-full text-center cursor-pointer border-t border-white/10"
                   >
-                    Request Appointment Slot
+                    Send Secure Message
                   </button>
-                </div>
-              </form>
-            )}
-
-            {/* STEP 4: Appointment Receipt / Confirmation */}
-            {step === 4 && (
-              <div className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 mx-auto mb-4">
-                    <CheckCircle className="w-10 h-10" />
-                  </div>
-                  <h4 className="font-serif text-xl font-bold text-slate-950">
-                    Booking Intake Complete!
-                  </h4>
-                  <p className="text-xs text-emerald-700 font-semibold bg-emerald-50 px-3 py-1.5 rounded-full inline-block mt-2">
-                    Reference ID: DB-2026-{(Math.random() * 10000).toFixed(0)}
-                  </p>
-                </div>
-
-                {/* Secure Receipt block */}
-                <div className="border border-slate-200 rounded-2xl p-5 bg-slate-50 space-y-4 text-xs relative">
-                  {/* Decorative badge watermark */}
-                  <div className="absolute top-4 right-4 text-slate-300 opacity-20">
-                    <Shield className="w-12 h-12" />
-                  </div>
-
-                  <h5 className="font-bold text-slate-900 border-b border-slate-200 pb-1.5 uppercase tracking-wide">
-                    Patient Consultation Voucher
-                  </h5>
-
-                  <div className="space-y-2 text-slate-600 leading-normal">
-                    <p>
-                      <strong className="text-slate-800">Patient:</strong> {patientName} (DOB: {patientDob})
-                    </p>
-                    <p>
-                      <strong className="text-slate-800">Assigned Clinic:</strong>{" "}
-                      {selectedOffice === "springfield" ? "Springfield, NJ" : "Wall Township, NJ"}
-                    </p>
-                    <p>
-                      <strong className="text-slate-800">Consultation Category:</strong>{" "}
-                      {activeServiceObj ? activeServiceObj.title : "General Allergy & Immunology"}
-                    </p>
-                    <p>
-                      <strong className="text-slate-800">Preference:</strong> {preferredTime.toUpperCase()} Block
-                    </p>
-                    <p>
-                      <strong className="text-slate-800">Status:</strong>{" "}
-                      <span className="text-emerald-700 font-bold">Awaiting Coordinator Confirmation</span>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Patient checklist */}
-                <div className="space-y-3 bg-dominant-green-light/40 border border-dominant-green-light p-5 rounded-2xl">
-                  <h5 className="font-serif text-slate-950 text-xs font-bold flex items-center gap-1.5">
-                    <ClipboardList className="w-4 h-4 text-dominant-green" />
-                    <span>Important Preparation Checklist:</span>
-                  </h5>
-                  <ul className="space-y-2 text-[11px] text-slate-600 leading-relaxed">
-                    <li className="flex items-start gap-1.5">
-                      <span className="text-dominant-green font-bold">•</span>
-                      <span>
-                        <strong>Allergy Testing Preparation:</strong> If scheduled for skin prick testing, please stop all oral antihistamines <strong>5 to 7 days prior</strong> to this appointment.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-1.5">
-                      <span className="text-dominant-green font-bold">•</span>
-                      <span>
-                        <strong>What to Bring:</strong> Government photo ID, physical health insurance cards, and a printed list of your active medications and dosages.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-1.5">
-                      <span className="text-dominant-green font-bold">•</span>
-                      <span>
-                        <strong>Coordination Notice:</strong> Our medical receptionist will contact you via phone or email within <strong>4 to 8 business hours</strong> to lock in your exact arrival time.
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="flex gap-3">
-                  <button
-                    type="button"
-                    onClick={() => window.print()}
-                    className="border border-slate-300 hover:border-slate-400 text-slate-700 font-bold text-xs px-4 py-3 rounded-lg transition-colors flex-1 text-center"
-                  >
-                    Print Intake Voucher
-                  </button>
-                  <button
-                    type="button"
-                    onClick={resetBooking}
-                    className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-4 py-3 rounded-lg transition-colors flex-1 text-center"
-                  >
-                    Submit Another Intake
-                  </button>
-                </div>
-              </div>
-            )}
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </div>

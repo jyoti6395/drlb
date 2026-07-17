@@ -9,6 +9,8 @@ import AboutView from "./components/AboutView";
 import ServicesView from "./components/ServicesView";
 import ResourcesView from "./components/ResourcesView";
 import ContactView from "./components/ContactView";
+import ImmuneDisordersView from "./components/ImmuneDisordersView";
+import SinusitisView from "./components/SinusitisView";
 
 // Lucide icons for the services preview cards
 import { Eye, ShieldCheck, Pill, Wind, ClipboardList, Activity, ArrowRight, Heart, Calendar, MapPin, Clock, Phone, Printer, ExternalLink, CheckCircle } from "lucide-react";
@@ -37,9 +39,7 @@ export default function App() {
   };
 
   const handleBookClick = () => {
-    setPreselectedService("unspecified");
-    setCurrentView("contact");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.location.href = "https://www.zocdoc.com/practice/starx-allergy-and-asthma-center-llc-23198";
   };
 
   const handleContactClick = () => {
@@ -275,10 +275,7 @@ export default function App() {
                           <div className="mt-3 flex items-center gap-3">
                             <span className="text-xs font-bold text-slate-400">OR</span>
                             <button
-                              onClick={() => {
-                                setCurrentView("contact");
-                                window.scrollTo({ top: 0, behavior: "smooth" });
-                              }}
+                              onClick={handleBookClick}
                               className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 animate-pulse"
                             >
                               <span>Book an Appointment</span>
@@ -311,7 +308,7 @@ export default function App() {
                       ) : (
                         <form onSubmit={handleHomeContactSubmit} className="space-y-4 font-sans">
                           <div>
-                            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" htmlFor="home-name">
+                            <label className="block text-xs font-bold text-slate-700 tracking-wider mb-1.5" htmlFor="home-name">
                               Enter your name
                             </label>
                             <input
@@ -326,7 +323,7 @@ export default function App() {
                           </div>
 
                           <div>
-                            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" htmlFor="home-email">
+                            <label className="block text-xs font-bold text-slate-700  tracking-wider mb-1.5" htmlFor="home-email">
                               Enter your email
                             </label>
                             <input
@@ -341,7 +338,7 @@ export default function App() {
                           </div>
 
                           <div>
-                            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" htmlFor="home-phone">
+                            <label className="block text-xs font-bold text-slate-700  tracking-wider mb-1.5" htmlFor="home-phone">
                               Phone
                             </label>
                             <input
@@ -356,7 +353,7 @@ export default function App() {
                           </div>
 
                           <div>
-                            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" htmlFor="home-message">
+                            <label className="block text-xs font-bold text-slate-700  tracking-wider mb-1.5" htmlFor="home-message">
                               Your message
                             </label>
                             <textarea
@@ -464,13 +461,40 @@ export default function App() {
         )}
 
         {currentView === "services" && (
-          <ServicesView onSelectService={handleRequestService} />
+          <ServicesView 
+            onSelectService={handleRequestService} 
+            setView={setCurrentView}
+            onBookClick={handleBookClick}
+          />
         )}
 
-        {currentView === "resources" && <ResourcesView />}
+        {currentView === "immune-disorders" && (
+          <ImmuneDisordersView 
+            setView={setCurrentView}
+            onBookClick={handleBookClick}
+          />
+        )}
+
+        {currentView === "sinusitis" && (
+          <SinusitisView 
+            setView={setCurrentView}
+            onBookClick={handleBookClick}
+          />
+        )}
+
+        {currentView === "resources" && (
+          <ResourcesView 
+            setView={setCurrentView}
+            onBookClick={handleBookClick}
+          />
+        )}
 
         {currentView === "contact" && (
-          <ContactView preselectedServiceId={preselectedService} />
+          <ContactView 
+            preselectedServiceId={preselectedService} 
+            setView={setCurrentView}
+            onBookClick={handleBookClick}
+          />
         )}
       </main>
 
